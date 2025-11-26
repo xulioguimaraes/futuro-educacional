@@ -12,7 +12,7 @@ export default function Home() {
   return (
     <div className="min-h-screen">
       <Header />
-      <section id="hero">
+      <section className='max-h-screen' id="hero">
         <Hero />
       </section>
       <section id="ensino">

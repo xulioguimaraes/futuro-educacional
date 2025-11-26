@@ -90,7 +90,7 @@ export default function Header() {
       </div>
 
       {/* Main Navigation Bar */}
-      <nav className=" relative z-20 text-white py-4">
+      <nav className=" relative z-20 text-white">
         <div className="container fixed top-[35px] left-0 right-0 rounded-b-[30px] mx-auto px-8 flex items-center justify-between bg-gradient-to-r from-[#001F63] to-[#002576]">
           {/* Logo */}
           <Link href="/" className="flex items-center ">
