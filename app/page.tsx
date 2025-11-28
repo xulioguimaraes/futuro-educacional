@@ -10,8 +10,7 @@ import Footer from "./components/Footer";
 
 export default function Home() {
   return (
-    <div className="min-h-screen">
-      <Header />
+    <>
       <section className="max-h-screen" id="hero">
         <Hero />
       </section>
@@ -33,8 +32,6 @@ export default function Home() {
       <section id="depoimentos">
         <Testimonials />
       </section>
-
-      <Footer />
-    </div>
+    </>
   );
 }
