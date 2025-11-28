@@ -1,36 +1,66 @@
-import React from 'react';
+import React from "react";
+import Image from "next/image";
+import ButtonWithIcon from "./ButtonWithIcon";
 
 export default function Sports() {
   return (
-    <section className="py-16 bg-white">
-      <div className="container mx-auto px-4">
-        <div className="flex flex-col md:flex-row items-center gap-12">
-          {/* Left side - Image */}
-          <div className="flex-1">
-            <div className="bg-gray-300 rounded-lg w-full h-96 flex items-center justify-center text-gray-500">
-              <span>Imagem: Atletas com Troféu</span>
+    <section className="py-16 relative overflow-hidden">
+      {/* Background image */}
+      <div className="absolute inset-0">
+        <Image
+          src="/BACKGROUND-sport.png"
+          alt="Background"
+          fill
+          className="object-cover"
+          priority
+        />
+      </div>
+
+      {/* Athletes image - fixed at bottom of section */}
+      <div className="absolute bottom-0 left-0 right-0 z-10">
+        <div className="container mx-auto px-4">
+          <div className="flex-1 max-w-md mx-auto md:mx-0">
+            <div className="relative w-full h-96">
+              <Image
+                src="/freepik__background__78261 1.png"
+                alt="Atletas com Troféu"
+                fill
+                className="object-contain"
+                style={{ objectPosition: "bottom" }}
+              />
             </div>
           </div>
+        </div>
+      </div>
+
+      <div className="container mx-auto px-4 relative z-10">
+        <div className="flex flex-col md:flex-row gap-12 items-start">
+          {/* Left side - Spacer for image */}
+          <div className="flex-1 hidden md:block"></div>
 
           {/* Right side - Content */}
           <div className="flex-1">
-            <span className="text-sm font-semibold text-blue-600 uppercase">ESPORTES</span>
-            <h2 className="text-3xl md:text-4xl font-bold text-[#1e3a5f] mt-2 mb-4">
+            <span className="text-sm font-bold text-[#1C437F] uppercase">
+              ESPORTES
+            </span>
+            <h2
+              className="text-[40px] md:text-4xl mt-2 mb-4 text-[#17012C]"
+              style={{
+                fontFamily: "var(--font-poppins)",
+                fontWeight: 800,
+                lineHeight: "130%",
+                letterSpacing: "1.5px",
+              }}
+            >
               Conheça os destaques esportivos dos nossos estudantes
             </h2>
             <p className="text-lg text-gray-600 mb-8">
               O esporte formando campeões e cidadãos.
             </p>
-            <button className="px-6 py-3 bg-[#fbbf24] text-[#1e3a5f] rounded-md font-medium hover:bg-[#f59e0b] flex items-center gap-2">
-              Conheça todas modalidades
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-              </svg>
-            </button>
+            <ButtonWithIcon>Conheça todas modalidades</ButtonWithIcon>
           </div>
         </div>
       </div>
     </section>
   );
 }
-

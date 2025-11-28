@@ -1,119 +1,246 @@
-import React from 'react';
+'use client';
+
+import Image from "next/image";
+import React, { useState } from "react";
 
 export default function Testimonials() {
   const testimonials = [
     {
-      text: 'Melhor escola de Marabá! Topíssima!',
-      author: 'Delzyane Ferreira',
-      role: 'Mãe de aluno',
-      avatar: 'DF',
+      text: "Melhor escola de Marabá! Topíssima!",
+      author: "Delzyane Ferreira",
+      role: "Mãe de aluno",
+      avatar: "DF",
     },
     {
-      text: 'Orgulho de ter meus filhos com vocês!!! Parceria 2026 efetuada com sucesso!',
-      author: 'Regiane Chamon',
-      role: 'Mãe de aluna',
-      avatar: 'RC',
+      text: "Orgulho de ter meus filhos com vocês!!! Parceria 2026 efetuada com sucesso!",
+      author: "Regiane Chamon",
+      role: "Mãe de aluna",
+      avatar: "RC",
     },
     {
-      text: 'Excelente instituição de ensino!',
-      author: 'Nome Exemplo',
-      role: 'Pai de aluno',
-      avatar: 'NE',
+      text: "Excelente instituição de ensino!",
+      author: "Nome Exemplo",
+      role: "Pai de aluno",
+      avatar: "NE",
     },
   ];
 
-  return (
-    <section className="py-16 relative" style={{
-      background: 'linear-gradient(to bottom, white, #e0e7ff)'
-    }}>
-      {/* Background dots */}
-      <div className="absolute inset-0 opacity-30">
-        <div className="absolute top-20 left-20 w-3 h-3 bg-green-500 rounded-full"></div>
-        <div className="absolute top-40 right-40 w-2 h-2 bg-pink-500 rounded-full"></div>
-        <div className="absolute bottom-20 left-1/4 w-3 h-3 bg-blue-500 rounded-full"></div>
-      </div>
+  const CARD_WIDTH = 320;
+  const CARD_GAP = 24;
+  const ITEM_SIZE = CARD_WIDTH + CARD_GAP;
+  const VISIBLE_COUNT = 2.5;
+  const SLIDER_MAX_WIDTH = CARD_WIDTH * VISIBLE_COUNT + CARD_GAP * 2;
 
+  const originalLength = testimonials.length;
+  const duplicatedTestimonials = [
+    ...testimonials,
+    ...testimonials,
+    ...testimonials,
+  ];
+  const startIndex = originalLength;
+
+  const [currentIndex, setCurrentIndex] = useState(startIndex);
+
+  const handleNavigation = (direction: "next" | "prev") => {
+    setCurrentIndex((prev) => {
+      const lastIndex =
+        duplicatedTestimonials.length - originalLength - 1;
+
+      if (direction === "next") {
+        const next = prev + 1 > lastIndex ? prev + 1 - originalLength : prev + 1;
+        return next;
+      }
+
+      const next = prev - 1 < originalLength ? prev - 1 + originalLength : prev - 1;
+      return next;
+    });
+  };
+
+  return (
+    <section
+      className="py-20 relative overflow-hidden"
+      style={{
+        backgroundImage: "url('/BACKGROUND-testemunho.png')",
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        backgroundRepeat: "no-repeat",
+      }}
+    >
       <div className="container mx-auto px-4 relative z-10">
         <div className="flex flex-col md:flex-row items-center gap-12">
           {/* Left side - Testimonials */}
-          <div className="flex-1 w-full">
+          <div className="flex-1 w-full max-w-3xl ">
             <div className="mb-6">
-              <span className="text-sm font-semibold text-blue-600 uppercase">TESTEMUNHOS</span>
-              <h2 className="text-3xl md:text-4xl font-bold text-[#1e3a5f] mt-2">
+              <span className="text-sm font-bold text-[#1C437F] uppercase">
+                TESTEMUNHOS
+              </span>
+              <h2 className="text-3xl md:text-4xl font-bold text-[#17012C] mt-2">
                 O que estão falando sobre nós
               </h2>
             </div>
 
-            <div className="relative">
-              <div className="flex gap-6 overflow-x-auto pb-4">
-                {testimonials.map((testimonial, index) => (
-                  <div
-                    key={index}
-                    className="flex-shrink-0 w-80 bg-white rounded-lg shadow-lg p-6"
-                  >
-                    {/* Stars */}
-                    <div className="flex gap-1 mb-4">
-                      {[...Array(5)].map((_, i) => (
-                        <svg
-                          key={i}
-                          className="w-5 h-5 text-[#fbbf24]"
-                          fill="currentColor"
-                          viewBox="0 0 20 20"
-                        >
-                          <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                        </svg>
-                      ))}
-                    </div>
+            <div className="relative max-w-full">
+              <div
+                className="overflow-hidden mx-auto"
+                style={{ maxWidth: `${SLIDER_MAX_WIDTH}px` }}
+              >
+                <div
+                  className="flex flex-nowrap transition-transform duration-500 ease-out"
+                  style={{
+                    transform: `translateX(-${
+                      currentIndex * ITEM_SIZE
+                    }px)`,
+                    gap: `${CARD_GAP}px`,
+                  }}
+                >
+                  {duplicatedTestimonials.map((testimonial, index) => (
+                    <div
+                      key={`${testimonial.author}-${index}`}
+                      className="shrink-0"
+                      style={{
+                        minWidth: `${CARD_WIDTH}px`,
+                        maxWidth: `${CARD_WIDTH}px`,
+                      }}
+                      aria-hidden={
+                        index < originalLength ||
+                        index >= originalLength * 2
+                      }
+                    >
+                      <div className="w-full bg-white rounded-2xl shadow-xl p-6">
+                        {/* Stars */}
+                        <div className="flex gap-1 mb-4">
+                          {[...Array(5)].map((_, i) => (
+                            <svg
+                              key={i}
+                              className="w-5 h-5 text-[#fbbf24]"
+                              fill="currentColor"
+                              viewBox="0 0 20 20"
+                            >
+                              <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                            </svg>
+                          ))}
+                        </div>
 
-                    {/* Quote icon */}
-                    <div className="mb-4">
-                      <svg className="w-8 h-8 text-blue-200" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.996 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.984zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
-                      </svg>
-                    </div>
+                        {/* Quote icon */}
+                        <div className="mb-4">
+                          <svg
+                            className="w-8 h-8 text-blue-200"
+                            fill="currentColor"
+                            viewBox="0 0 24 24"
+                          >
+                            <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.996 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.984zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
+                          </svg>
+                        </div>
 
-                    {/* Testimonial text */}
-                    <p className="text-gray-700 mb-6 italic">
-                      "{testimonial.text}"
-                    </p>
+                        {/* Testimonial text */}
+                        <p className="text-gray-700 mb-6 italic">
+                          &ldquo;{testimonial.text}&rdquo;
+                        </p>
 
-                    {/* Author */}
-                    <div className="flex items-center gap-3">
-                      <div className="w-12 h-12 rounded-full bg-blue-300 flex items-center justify-center text-white font-bold">
-                        {testimonial.avatar}
+                        {/* Author */}
+                        <div className="flex items-center gap-3">
+                          <div className="w-12 h-12 rounded-full bg-blue-300 flex items-center justify-center text-white font-bold">
+                            {testimonial.avatar}
+                          </div>
+                          <div>
+                            <p className="font-semibold text-[#1e3a5f]">
+                              {testimonial.author}
+                            </p>
+                            <p className="text-sm text-gray-500">
+                              {testimonial.role}
+                            </p>
+                          </div>
+                        </div>
                       </div>
-                      <div>
-                        <p className="font-semibold text-[#1e3a5f]">{testimonial.author}</p>
-                        <p className="text-sm text-gray-500">{testimonial.role}</p>
-                      </div>
                     </div>
-                  </div>
-                ))}
+                  ))}
+                </div>
               </div>
 
               {/* Navigation arrows */}
-              <button className="absolute left-0 top-1/2 transform -translate-y-1/2 -translate-x-4 w-12 h-12 rounded-full bg-[#fbbf24] text-[#1e3a5f] flex items-center justify-center hover:bg-[#f59e0b] shadow-lg">
-                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-                </svg>
+              <button
+                onClick={() => handleNavigation("prev")}
+                className="absolute left-0 top-1/2 transform -translate-y-1/2 hidden md:block"
+                aria-label="Depoimento anterior"
+              >
+                <div className="w-12 h-12 flex items-center justify-center">
+                  <svg
+                    width="75"
+                    height="75"
+                    viewBox="0 0 75 75"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="w-full h-full"
+                  >
+                    <circle
+                      cx="37.381"
+                      cy="37.381"
+                      r="35.381"
+                      stroke="#001F63"
+                      strokeWidth="4"
+                    />
+                    <path
+                      d="M42.6875 26.7666L32.3285 37.6463C32.2479 37.7257 32.1837 37.8216 32.1398 37.9281C32.0959 38.0346 32.0732 38.1494 32.0732 38.2655C32.0732 38.3815 32.0959 38.4963 32.1398 38.6028C32.1837 38.7093 32.2479 38.8052 32.3285 38.8846L42.6875 49.7643"
+                      stroke="#001F63"
+                      strokeWidth="4"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
+                </div>
               </button>
-              <button className="absolute right-0 top-1/2 transform -translate-y-1/2 translate-x-4 w-12 h-12 rounded-full bg-[#fbbf24] text-[#1e3a5f] flex items-center justify-center hover:bg-[#f59e0b] shadow-lg">
-                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                </svg>
+              <button
+                onClick={() => handleNavigation("next")}
+                className="absolute right-0 top-1/2 transform -translate-y-1/2 hidden md:block"
+                aria-label="Próximo depoimento"
+              >
+                <div className="w-12 h-12 flex items-center justify-center">
+                  <svg
+                    width="75"
+                    height="75"
+                    viewBox="0 0 75 75"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="w-full h-full"
+                  >
+                    <circle
+                      cx="35.381"
+                      cy="35.381"
+                      r="35.381"
+                      transform="matrix(-1 0 0 1 72.762 2)"
+                      stroke="#001F63"
+                      strokeWidth="4"
+                    />
+                    <path
+                      d="M32.0744 26.7666L42.4335 37.6463C42.5141 37.7257 42.5783 37.8216 42.6222 37.9281C42.6661 38.0346 42.6887 38.1494 42.6887 38.2655C42.6887 38.3815 42.6661 38.4963 42.6222 38.6028C42.5783 38.7093 42.5141 38.8052 42.4335 38.8846L32.0744 49.7643"
+                      stroke="#001F63"
+                      strokeWidth="4"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
+                </div>
               </button>
             </div>
           </div>
+        </div>
+      </div>
 
-          {/* Right side - Image */}
-          <div className="flex-1 hidden md:block">
-            <div className="bg-gray-300 rounded-lg w-full h-96 flex items-center justify-center text-gray-500">
-              <span>Imagem: Colaboradora</span>
-            </div>
+      {/* Collaborator image */}
+      <div className="absolute bottom-0 inset-x-0 pointer-events-none hidden md:block lg:block">
+        <div className="container mx-auto px-4">
+          <div className="flex justify-end">
+            <Image
+              src="/colaboradora.png"
+              alt="Equipe Futuro Educacional"
+              width={420}
+              height={520}
+              className="object-contain max-w-[360px] lg:max-w-[548px] w-full"
+              priority
+            />
           </div>
         </div>
       </div>
     </section>
   );
 }
-
