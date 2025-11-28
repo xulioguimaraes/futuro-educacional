@@ -5,6 +5,7 @@ interface ButtonWithIconProps {
   onClick?: () => void;
   type?: "button" | "submit" | "reset";
   className?: string;
+  icon?: React.ReactNode;
 }
 
 export default function ButtonWithIcon({
@@ -12,6 +13,24 @@ export default function ButtonWithIcon({
   onClick,
   type = "button",
   className = "",
+  icon = (
+    <svg
+      width="14"
+      height="14"
+      viewBox="0 0 14 14"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      className="shrink-0"
+    >
+      <path
+        d="M1 1.00002L13 1M13 1L13 13M13 1L1.00002 13"
+        stroke="#001F63"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  ),
 }: ButtonWithIconProps) {
   return (
     <button
@@ -22,24 +41,8 @@ export default function ButtonWithIcon({
     >
       <span className="bg-[#FDC938] rounded-full px-6 py-2 flex items-center gap-4">
         {children}
-        <svg
-          width="14"
-          height="14"
-          viewBox="0 0 14 14"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-          className="shrink-0"
-        >
-          <path
-            d="M1 1.00002L13 1M13 1L13 13M13 1L1.00002 13"
-            stroke="#001F63"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          />
-        </svg>
+        {icon}
       </span>
     </button>
   );
 }
-

@@ -1,36 +1,72 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Futuro Educacional
 
-## Getting Started
+Site institucional do Grupo Futuro Educacional desenvolvido com Next.js 16, TypeScript e Tailwind CSS.
 
-First, run the development server:
+## 🚀 Tecnologias
+
+- **Next.js 16** - Framework React
+- **TypeScript** - Tipagem estática
+- **Tailwind CSS** - Estilização
+- **React 19** - Biblioteca UI
+
+## 📋 Pré-requisitos
+
+- Node.js 18+ 
+- npm ou yarn
+
+## 🛠️ Instalação
+
+1. Clone o repositório
+2. Instale as dependências:
+
+```bash
+npm install
+```
+
+## 🏃 Executando o Projeto
+
+### Desenvolvimento
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Abra [http://localhost:3000](http://localhost:3000) no navegador.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Produção
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm run build
+npm start
+```
 
-## Learn More
+## 📁 Estrutura do Projeto
 
-To learn more about Next.js, take a look at the following resources:
+```
+app/
+├── components/
+│   ├── Header.tsx           # Header com navegação
+│   ├── Hero.tsx             # Seção hero principal
+│   ├── EducationalStages.tsx # Cards de níveis educacionais
+│   ├── ContactForm.tsx      # Formulário de contato
+│   ├── OurDifferential.tsx  # Seção de diferenciais
+│   ├── Sports.tsx           # Seção de esportes
+│   ├── AlumniStories.tsx    # Histórias de ex-alunos
+│   ├── Testimonials.tsx     # Depoimentos
+│   └── Footer.tsx           # Rodapé
+├── layout.tsx               # Layout principal
+├── page.tsx                 # Página inicial
+└── globals.css              # Estilos globais
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 🎨 Design
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+O site foi desenvolvido seguindo fielmente o design do Figma, mantendo:
+- Cores originais (azul escuro #1e3a5f, amarelo #fbbf24)
+- Layout responsivo
+- Componentes modulares
+- Tipografia e espaçamentos conforme especificado
 
-## Deploy on Vercel
+## 📝 Licença
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Este projeto foi desenvolvido para o Grupo Futuro Educacional.
