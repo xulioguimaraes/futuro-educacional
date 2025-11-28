@@ -175,60 +175,46 @@ export default function NossoGrupoPage() {
         title="Nossa História"
       />
 
-      <section className="py-20 bg-white">
-        <div className="container mx-auto px-4 grid lg:grid-cols-2 gap-12 items-center">
-          <div>
-            <span className="text-sm font-bold text-[#1C437F] uppercase">
-              Nosso grupo
-            </span>
-            <h2 className="text-3xl md:text-4xl font-extrabold text-[#17012C] mt-2 mb-6">
-              Conheça a nossa história
-            </h2>
-            <p className="text-lg text-gray-600 mb-10">
-              O Grupo Futuro Educacional, originado do antigo Centro Integrado
-              de Ensino Êxito em Marabá, destaca-se pela excelência em
-              aprovações universitárias e inovação na educação.
-            </p>
-            <div className="space-y-6 border-l-4 border-[#B5FE1C] pl-6">
-              {historyTimeline.map((item) => (
-                <div key={item.year}>
-                  <p className="text-sm uppercase tracking-[0.2em] text-[#1C437F] font-semibold">
-                    {item.year}
-                  </p>
-                  <p className="text-base text-gray-700 font-medium">
-                    {item.description}
-                  </p>
-                </div>
-              ))}
-            </div>
-          </div>
-          <div className="relative">
-            <div className="relative w-full h-[420px] rounded-3xl bg-linear-to-br from-white to-[#E9F1FF] shadow-2xl">
-              <Image
-                src="/logo-futuro.png"
-                alt="Marca Futuro"
-                fill
-                className="object-contain p-8"
-                priority
-              />
-            </div>
-            <div className="absolute -bottom-6 left-8 bg-white rounded-2xl shadow-xl p-4 flex items-center gap-3 border border-[#E2E8F0]">
-              <Image
-                src="/student.png"
-                alt="Pais satisfeitos"
-                width={64}
-                height={64}
-                className="rounded-full object-cover border-4 border-white"
-              />
-              <div>
-                <p className="text-sm font-semibold text-[#17012C]">
-                  Pais satisfeitos com o ensino.
-                </p>
-                <p className="text-xs text-gray-500">
-                  Resultado de um trabalho feito com excelência e carinho.
-                </p>
+      <section className=" bg-white relative">
+        <div className="container mx-auto px-4">
+          <div className="grid  gap-12 items-start py-20 ml-24 max-w-[520px]">
+            <div>
+              <span className="text-sm font-bold text-[#1C437F] uppercase">
+                Nosso grupo
+              </span>
+              <h2 className="text-3xl md:text-4xl font-extrabold text-[#17012C] mt-2 mb-6">
+                Conheça a nossa história
+              </h2>
+              <p className="text-lg text-[#504E4E] font-medium mb-4">
+                O Grupo Futuro Educacional, originado do antigo Centro Integrado
+                de Ensino Êxito em Marabá, destaca-se pela excelência em
+                aprovações universitárias e inovação na educação.
+              </p>
+              <div className="h-px w-full bg-[#E2E8F0] my-4" />
+              <div className="space-y-8">
+                {historyTimeline.map((item) => (
+                  <div key={item.year} className="flex items-start gap-3">
+                    <div className="w-2 h-2 rounded-full bg-black mt-2 shrink-0" />
+                    <div>
+                      <p className="text-base text-gray-700 font-medium">
+                        {item.year}: {item.description}
+                      </p>
+                    </div>
+                  </div>
+                ))}
               </div>
             </div>
+          </div>
+        </div>
+        <div className="absolute top-0 right-0 w-[50%] h-full pointer-events-none hidden lg:block">
+          <div className="relative w-full h-full">
+            <Image
+              src="/imagem-logo.png"
+              alt="Grupo Futuro Educacional"
+              fill
+              className="object-contain object-top"
+              priority
+            />
           </div>
         </div>
       </section>

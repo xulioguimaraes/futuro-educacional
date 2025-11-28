@@ -6,8 +6,10 @@ import Footer from "./components/Footer";
 
 const poppins = Poppins({
   subsets: ["latin"],
-  weight: ["400", "600", "900"],
+  weight: ["400", "600", "900", "700", "500", "800"],
   variable: "--font-poppins",
+  display: "swap",
+  fallback: ["system-ui", "arial"],
 });
 
 export const metadata: Metadata = {
@@ -15,7 +17,6 @@ export const metadata: Metadata = {
   description:
     "Matrículas 2026 abertas: do Infantil ao Ensino Médio, prepare seu filho para um futuro de conquistas.",
 };
-
 
 export default function RootLayout({
   children,

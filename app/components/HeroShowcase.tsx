@@ -12,7 +12,7 @@ export default function HeroShowcase({
   title,
 }: HeroShowcaseProps) {
   return (
-    <section className="relative overflow-hidden text-white py-24">
+    <section className="relative overflow-hidden text-white py-24 min-h-[464px]">
       <div className="absolute inset-0">
         <Image
           src={backgroundImage}
