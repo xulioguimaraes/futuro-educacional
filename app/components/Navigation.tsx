@@ -16,7 +16,7 @@ const navItems: NavItem[] = [
   { id: "ensino", label: "Ensino", href: "/ensino", type: "route" },
   { id: "documentos", label: "Documentos", href: "/documentos", type: "route" },
   { id: "trabalhe-conosco", label: "Trabalhe Conosco", href: "/trabalhe-conosco", type: "route" },
-  { id: "alunos", label: "Blog", href: "#alunos" },
+  { id: "blog", label: "Blog", href: "/blog", type: "route" },
   { id: "contato", label: "Contato", href: "#contato" },
 ];
 
@@ -89,7 +89,7 @@ export default function Navigation() {
             </svg>
           </span>
         ) : (isActive || isClicked) ? (
-          <span className="w-full h-full rounded-full border-[3px] border-[#001545] flex items-center justify-center px-4 py-2">
+          <span className="rounded-full border-[3px] border-[#001545] flex items-center justify-center px-4 py-2 -mx-4 -my-2">
             {item.label}
           </span>
         ) : (
@@ -97,13 +97,13 @@ export default function Navigation() {
         );
 
         const baseClasses = `
-          rounded-full font-medium text-sm transition-all duration-300 flex items-center gap-2
+          rounded-full font-medium text-sm flex items-center gap-2 px-4 py-2
           ${
             isContato
               ? "bg-transparent text-[#001F63] border border-[#FDC938]"
               : isActive || isClicked
               ? "bg-[#FDC938] text-[#001F63] border-[3px] border-[#FDC938] shadow-[0_0_20px_rgba(253,201,56,0.6)]"
-              : "px-4 py-2 bg-transparent text-white border-[3px] border-[#FDC938] hover:shadow-[0_0_15px_rgba(255,165,0,0.4)]"
+              : "bg-transparent text-white border-[3px] border-[#FDC938] hover:shadow-[0_0_15px_rgba(255,165,0,0.4)]"
           }
         `;
 
@@ -163,7 +163,7 @@ export default function Navigation() {
             </svg>
           </span>
         ) : isClicked ? (
-          <span className="w-full h-full rounded-full border-[3px] border-[#001545] flex items-center justify-center px-4 py-2">
+          <span className="rounded-full border-[3px] border-[#001545] flex items-center justify-center px-4 py-2 -mx-4 -my-2">
             {item.label}
           </span>
         ) : (
@@ -176,13 +176,13 @@ export default function Navigation() {
             href={item.href}
             onClick={(e) => handleSectionClick(e, item.id)}
             className={`
-              rounded-full font-medium text-sm transition-all duration-300 flex items-center gap-2
+              rounded-full font-medium text-sm flex items-center gap-2 px-4 py-2
               ${
                 isContato
                   ? "bg-transparent text-[#001F63] border border-[#FDC938]"
                   : isClicked
-                  ? "p-[3px] bg-[#FDC938] text-[#001F63] border-[3px] border-[#FDC938] shadow-[0_0_20px_rgba(253,201,56,0.6)]"
-                  : "px-4 py-2 bg-transparent text-white border-[3px] border-[#FDC938] hover:shadow-[0_0_15px_rgba(255,165,0,0.4)]"
+                  ? "bg-[#FDC938] text-[#001F63] border-[3px] border-[#FDC938] shadow-[0_0_20px_rgba(253,201,56,0.6)]"
+                  : "bg-transparent text-white border-[3px] border-[#FDC938] hover:shadow-[0_0_15px_rgba(255,165,0,0.4)]"
               }
             `}
             style={isContato ? { padding: "2px" } : undefined}
