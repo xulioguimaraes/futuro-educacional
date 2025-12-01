@@ -106,9 +106,7 @@ export default function OurDifferential() {
               return (
                 <div
                   key={`${item.title}-${index}`}
-                  className={`shrink-0 w-[268px] h-[401px] rounded-[24px] overflow-hidden relative text-white flex-none transition-all duration-500 ${
-                    isCenter ? "opacity-100 scale-100" : "opacity-20 scale-95"
-                  }`}
+                  className="shrink-0 w-[268px] h-[401px] rounded-[24px] overflow-hidden relative text-white flex-none transition-all duration-500"
                   aria-hidden={isGhost}
                 >
                   {item.imageSrc ? (
@@ -148,8 +146,18 @@ export default function OurDifferential() {
           </div>
 
           {/* Side gradients */}
-          <div className="pointer-events-none absolute left-0 top-0 h-full w-1/5 bg-linear-to-r from-white via-white/70 to-transparent" />
-          <div className="pointer-events-none absolute right-0 top-0 h-full w-1/5 bg-linear-to-l from-white via-white/70 to-transparent" />
+          <div 
+            className="pointer-events-none absolute left-0 top-0 h-full w-72"
+            style={{
+              background: 'linear-gradient(to right, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0.9) 50%, rgba(255, 255, 255, 0) 100%)'
+            }}
+          />
+          <div 
+              className="pointer-events-none absolute right-0 top-0 h-full w-72"
+            style={{
+              background: 'linear-gradient(to left, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0.9) 50%, rgba(255, 255, 255, 0) 100%)'
+            }}
+          />
 
           {/* Navigation arrows */}
           <button

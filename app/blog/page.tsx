@@ -12,7 +12,8 @@ const blogPosts = [
     title: "5 Dicas para fazer uma boa redação",
     author: "Prof. Antônio",
     comments: 2,
-    date: "20 SET",
+    day: "20",
+    month: "SET",
     image: "/crianças/crianca1.jpg",
     description:
       "Neque porro est qui dolorem ipsum quia quaed inventor. Neque porro est qui dolorem ipsum quia quaed inventor. Neque porro est qui dolorem ipsum quia quaed inventor.",
@@ -22,7 +23,8 @@ const blogPosts = [
     title: "5 Dicas para fazer uma boa redação",
     author: "Prof. Antônio",
     comments: 2,
-    date: "20 SET",
+    day: "20",
+    month: "SET",
     image: "/crianças/crianca2.jpg",
     description:
       "Neque porro est qui dolorem ipsum quia quaed inventor. Neque porro est qui dolorem ipsum quia quaed inventor. Neque porro est qui dolorem ipsum quia quaed inventor.",
@@ -32,7 +34,8 @@ const blogPosts = [
     title: "5 Dicas para fazer uma boa redação",
     author: "Prof. Antônio",
     comments: 2,
-    date: "20 SET",
+    day: "20",
+    month: "SET",
     image: "/crianças/crianca3.jpg",
     description:
       "Neque porro est qui dolorem ipsum quia quaed inventor. Neque porro est qui dolorem ipsum quia quaed inventor. Neque porro est qui dolorem ipsum quia quaed inventor.",
@@ -42,7 +45,8 @@ const blogPosts = [
     title: "5 Dicas para fazer uma boa redação",
     author: "Prof. Antônio",
     comments: 2,
-    date: "20 SET",
+    day: "20",
+    month: "SET",
     image: "/crianças/crianca4.jpg",
     description:
       "Neque porro est qui dolorem ipsum quia quaed inventor. Neque porro est qui dolorem ipsum quia quaed inventor. Neque porro est qui dolorem ipsum quia quaed inventor.",
@@ -52,7 +56,8 @@ const blogPosts = [
     title: "5 Dicas para fazer uma boa redação",
     author: "Prof. Antônio",
     comments: 2,
-    date: "20 SET",
+    day: "20",
+    month: "SET",
     image: "/crianças/crianca5.jpg",
     description:
       "Neque porro est qui dolorem ipsum quia quaed inventor. Neque porro est qui dolorem ipsum quia quaed inventor. Neque porro est qui dolorem ipsum quia quaed inventor.",
@@ -64,19 +69,19 @@ const latestPosts = [
     id: 1,
     title: "5 Dicas para fazer uma boa redação",
     author: "Prof. Antônio",
-    image: "/crianças/crianca1.jpg",
+    image: "/9dd5674bf9a68060ebe6088dae73de1e4161ba5d.jpg",
   },
   {
     id: 2,
     title: "5 Dicas para fazer uma boa redação",
     author: "Prof. Antônio",
-    image: "/crianças/crianca2.jpg",
+    image: "/9dd5674bf9a68060ebe6088dae73de1e4161ba5d.jpg",
   },
   {
     id: 3,
     title: "5 Dicas para fazer uma boa redação",
     author: "Prof. Antônio",
-    image: "/crianças/crianca3.jpg",
+    image: "/9dd5674bf9a68060ebe6088dae73de1e4161ba5d.jpg",
   },
 ];
 
@@ -88,7 +93,14 @@ const categories = [
   { name: "Química", count: 6 },
 ];
 
-const tags = ["Ciências", "ENEM", "Matemática", "Química", "Português", "Redação"];
+const tags = [
+  "Ciências",
+  "ENEM",
+  "Matemática",
+  "Química",
+  "Português",
+  "Redação",
+];
 
 const comments = [
   "Neque Porro Est Qui Dolorem Ipsum Quia Quaed Inventor",
@@ -113,7 +125,7 @@ export default function BlogPage() {
   };
 
   return (
-    <main className="bg-[#F5F7FF] min-h-screen">
+    <main className="bg-[#ffffff] min-h-screen">
       <HeroShowcase
         backgroundImage="/escola.jpg"
         eyebrow=""
@@ -121,25 +133,25 @@ export default function BlogPage() {
       />
 
       {/* Blog Content Section */}
-      <section className="py-12 bg-[#F5F7FF]">
+      <section className="py-12 bg-[#ffffff]">
         <div className="container mx-auto px-4">
           <div className="grid lg:grid-cols-3 gap-8">
             {/* Left Sidebar - Filters */}
             <aside className="lg:col-span-1 space-y-6">
               {/* Search */}
-              <div className="bg-white rounded-lg shadow-sm p-6">
-                <h3 className="text-lg font-bold text-[#001F63] mb-4">
+              <div className="rounded-lg bg-[#1C437F1A] p-6">
+                <h3 className="text-[22px] font-semibold text-[#17012C] mb-3">
                   Pesquise aqui
                 </h3>
-                <div className="flex items-center gap-2">
+                <div className="relative">
                   <input
                     type="text"
                     placeholder="Pesquise aqui"
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
-                    className="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#1C437F]"
+                    className="w-full px-4 py-3 pr-12 bg-white rounded-lg focus:outline-none focus:ring-2 focus:ring-[#1C437F]"
                   />
-                  <button className="w-10 h-10 bg-[#1C437F] text-white rounded-lg flex items-center justify-center hover:bg-[#1C437F]/90">
+                  <button className="absolute right-3 top-1/2 -translate-y-1/2 text-[#1C437F] hover:text-[#1C437F]/80">
                     <svg
                       width="20"
                       height="20"
@@ -148,18 +160,8 @@ export default function BlogPage() {
                       xmlns="http://www.w3.org/2000/svg"
                     >
                       <path
-                        d="M9 17C13.4183 17 17 13.4183 17 9C17 4.58172 13.4183 1 9 1C4.58172 1 1 4.58172 1 9C1 13.4183 4.58172 17 9 17Z"
-                        stroke="currentColor"
-                        strokeWidth="2"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      />
-                      <path
-                        d="M19 19L14.65 14.65"
-                        stroke="currentColor"
-                        strokeWidth="2"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
+                        d="M8.04937 16.0903C9.837 16.0904 11.5735 15.4939 12.9838 14.3955L18.3044 19.7161C18.7019 20.1 19.3353 20.089 19.7191 19.6915C20.0936 19.3038 20.0936 18.6891 19.7191 18.3014L14.3985 12.9808C17.1242 9.47199 16.4895 4.41791 12.9807 1.69215C9.47194 -1.03361 4.41791 -0.398871 1.69215 3.10991C-1.03361 6.6187 -0.398871 11.6728 3.10991 14.3985C4.52252 15.4959 6.26057 16.0912 8.04937 16.0903ZM3.77429 3.77121C6.13538 1.41008 9.96346 1.41004 12.3246 3.77113C14.6857 6.13221 14.6858 9.96029 12.3247 12.3214C9.96359 14.6826 6.13551 14.6826 3.77437 12.3215C3.77433 12.3215 3.77433 12.3215 3.77429 12.3214C1.4132 9.97754 1.39929 6.16341 3.74317 3.80233C3.75353 3.79193 3.76389 3.78157 3.77429 3.77121Z"
+                        fill="#1C437F"
                       />
                     </svg>
                   </button>
@@ -167,26 +169,46 @@ export default function BlogPage() {
               </div>
 
               {/* Latest Posts */}
-              <div className="bg-white rounded-lg shadow-sm p-6">
-                <h3 className="text-lg font-bold text-[#001F63] mb-4">
+              <div className="bg-[#1C437F1A] rounded-lg p-6">
+                <h3 className="text-[22px] font-semibold text-[#17012C] mb-4">
                   Últimos Posts
                 </h3>
                 <div className="space-y-4">
                   {latestPosts.map((post) => (
                     <div key={post.id} className="flex gap-3">
-                      <div className="relative w-20 h-20 flex-shrink-0 rounded-lg overflow-hidden">
+                      <div className="relative w-20 h-20 shrink-0 rounded-lg overflow-hidden">
                         <Image
                           src={post.image}
                           alt={post.title}
                           fill
+                          sizes="80px"
                           className="object-cover"
                         />
                       </div>
                       <div className="flex-1">
-                        <p className="text-sm text-gray-600 mb-1">
-                          Por: {post.author}
-                        </p>
-                        <h4 className="text-sm font-semibold text-[#001F63] line-clamp-2">
+                        <div className="flex items-center gap-2 mb-1">
+                          <svg
+                            width="11"
+                            height="12"
+                            viewBox="0 0 11 12"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path
+                              d="M5.37148 6.2313C7.08578 6.2313 8.48714 4.82995 8.48714 3.11565C8.48714 1.40135 7.08578 0 5.37148 0C3.65719 0 2.25586 1.40135 2.25586 3.11565C2.25586 4.82995 3.65721 6.2313 5.37148 6.2313Z"
+                              fill="#1C437F"
+                            />
+                            <path
+                              d="M10.7185 8.72108C10.6369 8.51699 10.528 8.32652 10.4056 8.14964C9.77972 7.22446 8.81376 6.61222 7.72532 6.46256C7.58928 6.44897 7.43962 6.47615 7.33076 6.55779C6.75933 6.97957 6.07907 7.19725 5.37157 7.19725C4.66407 7.19725 3.98381 6.97957 3.41238 6.55779C3.30352 6.47615 3.15386 6.43535 3.01782 6.46256C1.92938 6.61222 0.949799 7.22446 0.337559 8.14964C0.215111 8.32652 0.106257 8.53061 0.0246426 8.72108C-0.0161647 8.80272 -0.00257098 8.89795 0.0382363 8.97959C0.14709 9.17006 0.283132 9.36056 0.40558 9.52381C0.596049 9.78233 0.800137 10.0136 1.03144 10.2313C1.22191 10.4218 1.43959 10.5986 1.6573 10.7755C2.73212 11.5782 4.02464 12 5.35798 12C6.69131 12 7.98384 11.5782 9.05865 10.7755C9.27634 10.6122 9.49402 10.4218 9.68451 10.2313C9.90219 10.0136 10.1199 9.7823 10.3104 9.52381C10.4464 9.34694 10.5689 9.17006 10.6777 8.97959C10.7457 8.89795 10.7593 8.80269 10.7185 8.72108Z"
+                              fill="#1C437F"
+                            />
+                          </svg>
+                          <p className="text-xs text-gray-600 ">
+                            Por: {post.author}
+                          </p>
+                        </div>
+
+                        <h4 className=" font-semibold text-[#17012C] line-clamp-2">
                           {post.title}
                         </h4>
                       </div>
@@ -196,8 +218,8 @@ export default function BlogPage() {
               </div>
 
               {/* Categories */}
-              <div className="bg-white rounded-lg shadow-sm p-6">
-                <h3 className="text-lg font-bold text-[#001F63] mb-4">
+              <div className="bg-[#1C437F1A] rounded-lg p-6">
+                <h3 className="text-[22px] font-semibold text-[#17012C] mb-4">
                   Categories
                 </h3>
                 <ul className="space-y-2">
@@ -205,10 +227,10 @@ export default function BlogPage() {
                     <li key={index}>
                       <a
                         href="#"
-                        className="flex items-center justify-between text-gray-600 hover:text-[#1C437F] transition-colors"
+                        className="flex items-center justify-between text-[#17012C] hover:text-[#1C437F] transition-colors"
                       >
                         <span>{category.name}</span>
-                        <span className="text-sm">({category.count})</span>
+                        <span className="">({category.count})</span>
                       </a>
                     </li>
                   ))}
@@ -216,16 +238,18 @@ export default function BlogPage() {
               </div>
 
               {/* Tags */}
-              <div className="bg-white rounded-lg shadow-sm p-6">
-                <h3 className="text-lg font-bold text-[#001F63] mb-4">Tags</h3>
+              <div className="bg-[#1C437F1A] rounded-lg p-6">
+                <h3 className="text-[22px] font-semibold text-[#17012C] mb-4">
+                  Tags
+                </h3>
                 <div className="flex flex-wrap gap-2">
                   {tags.map((tag, index) => (
                     <button
                       key={index}
-                      className={`px-3 py-1 rounded-full text-sm font-medium transition-colors ${
+                      className={`px-3 py-1 rounded-[5px]  font-normal transition-colors ${
                         tag === "ENEM"
                           ? "bg-[#1C437F] text-white"
-                          : "bg-gray-100 text-gray-700 hover:bg-gray-200"
+                          : "bg-white text-[#17012C] hover:bg-gray-200"
                       }`}
                     >
                       {tag}
@@ -235,27 +259,36 @@ export default function BlogPage() {
               </div>
 
               {/* Comments */}
-              <div className="bg-white rounded-lg shadow-sm p-6">
-                <h3 className="text-lg font-bold text-[#001F63] mb-4">
+              <div className="bg-[#1C437F1A] rounded-lg p-6">
+                <h3 className="text-[22px] font-semibold text-[#17012C] mb-4">
                   Comentários
                 </h3>
-                <div className="space-y-3">
+                <div className="space-y-5">
                   {comments.map((comment, index) => (
-                    <div key={index} className="flex items-start gap-2">
-                      <svg
-                        width="16"
-                        height="16"
-                        viewBox="0 0 16 16"
-                        fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
-                        className="text-[#1C437F] mt-1 flex-shrink-0"
-                      >
-                        <path
-                          d="M8 0C3.58172 0 0 3.58172 0 8C0 12.4183 3.58172 16 8 16C8.55228 16 9 15.5523 9 15C9 14.4477 8.55228 14 8 14C4.68629 14 2 11.3137 2 8C2 4.68629 4.68629 2 8 2C11.3137 2 14 4.68629 14 8C14 9.10457 13.6569 10.1214 13.0711 10.9497C12.4853 11.7781 11.6569 12.4183 10.6569 12.8284C10.1046 13.0386 9.55228 13.4477 9.55228 14C9.55228 14.5523 10 15 10.5523 15C11.6569 15 12.6569 14.6569 13.4853 14.0711C14.3137 13.4853 14.9497 12.6569 15.364 11.6569C15.7781 10.6569 16 9.55228 16 8C16 3.58172 12.4183 0 8 0Z"
-                          fill="currentColor"
-                        />
-                      </svg>
-                      <p className="text-sm text-gray-600">{comment}</p>
+                    <div key={index} className="flex items-start gap-4">
+                      <div className="bg-[#1C437F] rounded-full w-20 h-12 flex items-center justify-center">
+                        <svg
+                          width="24"
+                          height="21"
+                          viewBox="0 0 24 21"
+                          fill="none"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            d="M11.8125 20.6249C11.6574 20.6249 11.5021 20.5865 11.3613 20.5092C11.0614 20.3445 10.875 20.0295 10.875 19.6874V17.8125C10.875 17.2956 10.4544 16.875 9.9375 16.875H8.4375C3.78506 16.875 0 13.0899 0 8.4375C0 3.78506 3.78506 0 8.4375 0H15.5625C20.2149 0 24 3.78506 24 8.4375C24 8.47626 23.9998 8.51484 23.9994 8.55333C23.9773 10.826 23.2868 12.5292 21.7609 14.0761C20.3646 15.4916 18.3243 16.75 15.5003 18.4917C14.5493 19.0783 13.4715 19.7431 12.3157 20.4784C12.1626 20.5758 11.9877 20.6249 11.8125 20.6249ZM8.4375 1.875C4.81894 1.875 1.875 4.81894 1.875 8.4375C1.875 12.0561 4.81894 15 8.4375 15H9.9375C11.4883 15 12.75 16.2617 12.75 17.8125V17.9894C13.3751 17.5995 13.9667 17.2347 14.516 16.8959C17.2284 15.2229 19.1882 14.0141 20.4261 12.7594C21.6149 11.5543 22.107 10.3304 22.1245 8.53514C22.1248 8.50275 22.125 8.47017 22.125 8.4375C22.125 4.81894 19.1811 1.875 15.5625 1.875H8.4375Z"
+                            fill="white"
+                          />
+                          <path
+                            d="M15.5625 7.5H8.4375C7.91972 7.5 7.5 7.08028 7.5 6.5625C7.5 6.04472 7.91972 5.625 8.4375 5.625H15.5625C16.0803 5.625 16.5 6.04472 16.5 6.5625C16.5 7.08028 16.0803 7.5 15.5625 7.5Z"
+                            fill="white"
+                          />
+                          <path
+                            d="M15.5625 11.25H8.4375C7.91972 11.25 7.5 10.8303 7.5 10.3125C7.5 9.79472 7.91972 9.375 8.4375 9.375H15.5625C16.0803 9.375 16.5 9.79472 16.5 10.3125C16.5 10.8303 16.0803 11.25 15.5625 11.25Z"
+                            fill="white"
+                          />
+                        </svg>
+                      </div>
+                      <p className=" text-[#504E4E]">{comment}</p>
                     </div>
                   ))}
                 </div>
@@ -263,39 +296,80 @@ export default function BlogPage() {
             </aside>
 
             {/* Right Column - Blog Posts */}
-            <div className="lg:col-span-2 space-y-8">
+            <div className="lg:col-span-2 space-y-2">
               {currentPosts.map((post) => (
-                <article
-                  key={post.id}
-                  className="bg-white rounded-lg shadow-sm overflow-hidden"
-                >
-                  <div className="relative h-64 w-full">
-                    <Image
-                      src={post.image}
-                      alt={post.title}
-                      fill
-                      className="object-cover"
-                    />
-                    <div className="absolute top-4 left-4 bg-[#1C437F] text-white px-4 py-2 rounded-lg font-semibold">
-                      {post.date}
+                <>
+                  <article
+                    key={post.id}
+                    className="bg-white rounded-lg  overflow-hidden"
+                  >
+                    <div className="relative h-64 w-full">
+                      <Image
+                        src={post.image}
+                        alt={post.title}
+                        fill
+                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                        className="object-cover"
+                      />
+                      <div className="absolute top-4 left-4  text-white bg-[#F2EEEA] rounded-lg font-bold flex flex-col items-center">
+                        <span className="bg-[#1C437F] px-[22px] rounded-[5px] py-[8px] text-[14px] leading-none">{post.day}</span>
+                        <span className="px-4 py-1 rounded-[5px] text-[14px] bg-[#F2EEEA] text-[#17012C]">{post.month}</span>
+                      </div>
                     </div>
-                  </div>
-                  <div className="p-6">
-                    <div className="flex items-center gap-4 text-sm text-gray-600 mb-3">
-                      <span>Por: {post.author}</span>
-                      <span>{post.comments} Comentários</span>
+                    <div className="pt-8">
+                      <div className="flex items-center gap-4 text-sm text-gray-600 mb-3">
+                        <div className="flex items-center gap-2">
+                          <svg
+                            width="11"
+                            height="12"
+                            viewBox="0 0 11 12"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path
+                              d="M5.37148 6.2313C7.08578 6.2313 8.48714 4.82995 8.48714 3.11565C8.48714 1.40135 7.08578 0 5.37148 0C3.65719 0 2.25586 1.40135 2.25586 3.11565C2.25586 4.82995 3.65721 6.2313 5.37148 6.2313Z"
+                              fill="#1C437F"
+                            />
+                            <path
+                              d="M10.7185 8.72108C10.6369 8.51699 10.528 8.32652 10.4056 8.14964C9.77972 7.22446 8.81376 6.61222 7.72532 6.46256C7.58928 6.44897 7.43962 6.47615 7.33076 6.55779C6.75933 6.97957 6.07907 7.19725 5.37157 7.19725C4.66407 7.19725 3.98381 6.97957 3.41238 6.55779C3.30352 6.47615 3.15386 6.43535 3.01782 6.46256C1.92938 6.61222 0.949799 7.22446 0.337559 8.14964C0.215111 8.32652 0.106257 8.53061 0.0246426 8.72108C-0.0161647 8.80272 -0.00257098 8.89795 0.0382363 8.97959C0.14709 9.17006 0.283132 9.36056 0.40558 9.52381C0.596049 9.78233 0.800137 10.0136 1.03144 10.2313C1.22191 10.4218 1.43959 10.5986 1.6573 10.7755C2.73212 11.5782 4.02464 12 5.35798 12C6.69131 12 7.98384 11.5782 9.05865 10.7755C9.27634 10.6122 9.49402 10.4218 9.68451 10.2313C9.90219 10.0136 10.1199 9.7823 10.3104 9.52381C10.4464 9.34694 10.5689 9.17006 10.6777 8.97959C10.7457 8.89795 10.7593 8.80269 10.7185 8.72108Z"
+                              fill="#1C437F"
+                            />
+                          </svg>
+                          <span className="text-xs text-[#504E4E]">
+                            Por: {post.author}
+                          </span>
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <svg
+                            width="15"
+                            height="14"
+                            viewBox="0 0 15 14"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path
+                              d="M7.34028 0C3.29286 0 1.97273e-05 2.96351 1.97273e-05 6.60623C1.97273e-05 7.87952 0.402755 9.11293 1.16663 10.1795C1.02203 11.7789 0.634463 12.9663 0.0717096 13.5288C-0.0026717 13.6032 -0.021267 13.717 0.0257106 13.8109C0.0673054 13.8949 0.152942 13.9465 0.244695 13.9465C0.25595 13.9465 0.267205 13.9458 0.278705 13.944C0.377798 13.9301 2.6797 13.5988 4.34472 12.6377C5.29014 13.0192 6.29723 13.2125 7.34028 13.2125C11.3877 13.2125 14.6805 10.249 14.6805 6.60623C14.6805 2.96351 11.3877 0 7.34028 0ZM3.91482 7.58493C3.37507 7.58493 2.93612 7.14599 2.93612 6.60623C2.93612 6.06648 3.37507 5.62753 3.91482 5.62753C4.45458 5.62753 4.89353 6.06648 4.89353 6.60623C4.89353 7.14599 4.45458 7.58493 3.91482 7.58493ZM7.34028 7.58493C6.80052 7.58493 6.36158 7.14599 6.36158 6.60623C6.36158 6.06648 6.80052 5.62753 7.34028 5.62753C7.88003 5.62753 8.31898 6.06648 8.31898 6.60623C8.31898 7.14599 7.88003 7.58493 7.34028 7.58493ZM10.7657 7.58493C10.226 7.58493 9.78703 7.14599 9.78703 6.60623C9.78703 6.06648 10.226 5.62753 10.7657 5.62753C11.3055 5.62753 11.7444 6.06648 11.7444 6.60623C11.7444 7.14599 11.3055 7.58493 10.7657 7.58493Z"
+                              fill="#1C437F"
+                            />
+                          </svg>
+                          <span className="text-xs text-[#504E4E]">
+                            {post.comments} Comentários
+                          </span>
+                        </div>
+                      </div>
+                      <h2 className="text-2xl font-bold text-[#17012C] py-4">
+                        {post.title}
+                      </h2>
+                      <p className="text-[#504E4E] font-normal mb-6 line-clamp-3">
+                        {post.description}
+                      </p>
+                      <button className="bg-[#1C437F] text-white font-semibold px-6 py-2 rounded-lg hover:bg-[#1C437F]/90 transition-colors">
+                        Leia Mais
+                      </button>
+                      <div className="h-[1px] mt-8 bg-[#E4E4E4] w-full"></div>
                     </div>
-                    <h2 className="text-2xl font-bold text-[#001F63] mb-3">
-                      {post.title}
-                    </h2>
-                    <p className="text-gray-600 mb-4 line-clamp-3">
-                      {post.description}
-                    </p>
-                    <button className="bg-[#1C437F] text-white font-semibold px-6 py-2 rounded-lg hover:bg-[#1C437F]/90 transition-colors">
-                      Leia Mais
-                    </button>
-                  </div>
-                </article>
+                  </article>
+                </>
               ))}
 
               {/* Pagination */}
@@ -313,4 +387,3 @@ export default function BlogPage() {
     </main>
   );
 }
-

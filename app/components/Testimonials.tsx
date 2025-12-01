@@ -26,7 +26,7 @@ export default function Testimonials() {
   ];
 
   const CARD_WIDTH = 320;
-  const CARD_GAP = 24;
+  const CARD_GAP = 16;
   const ITEM_SIZE = CARD_WIDTH + CARD_GAP;
   const VISIBLE_COUNT = 2.5;
   const SLIDER_MAX_WIDTH = CARD_WIDTH * VISIBLE_COUNT + CARD_GAP * 2;
@@ -80,10 +80,14 @@ export default function Testimonials() {
               </h2>
             </div>
 
-            <div className="relative max-w-full">
+            <div className="relative max-w-full pl-[40px]">
               <div
                 className="overflow-hidden mx-auto"
-                style={{ maxWidth: `${SLIDER_MAX_WIDTH}px` }}
+                style={{ 
+                  maxWidth: `${SLIDER_MAX_WIDTH}px`,
+                  WebkitMaskImage: 'linear-gradient(to right, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 1) 70%, rgba(0, 0, 0, 0.3) 90%, rgba(0, 0, 0, 0) 100%)',
+                  maskImage: 'linear-gradient(to right, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 1) 70%, rgba(0, 0, 0, 0.3) 90%, rgba(0, 0, 0, 0) 100%)',
+                }}
               >
                 <div
                   className="flex flex-nowrap transition-transform duration-500 ease-out"
@@ -161,7 +165,7 @@ export default function Testimonials() {
               {/* Navigation arrows */}
               <button
                 onClick={() => handleNavigation("prev")}
-                className="absolute left-0 top-1/2 transform -translate-y-1/2 hidden md:block"
+                className="absolute -left-4 top-1/2 transform -translate-y-1/2 hidden md:block"
                 aria-label="Depoimento anterior"
               >
                 <div className="w-12 h-12 flex items-center justify-center">
@@ -192,7 +196,7 @@ export default function Testimonials() {
               </button>
               <button
                 onClick={() => handleNavigation("next")}
-                className="absolute right-0 top-1/2 transform -translate-y-1/2 hidden md:block"
+                className="absolute right-0 top-1/2 transform -translate-y-1/2 hidden md:block z-20"
                 aria-label="Próximo depoimento"
               >
                 <div className="w-12 h-12 flex items-center justify-center">

@@ -4,17 +4,15 @@ import ButtonWithIcon from "./ButtonWithIcon";
 
 export default function Sports() {
   return (
-    <section className="py-16 relative overflow-hidden">
-      {/* Background image */}
-      <div className="absolute inset-0">
-        <Image
-          src="/BACKGROUND-sport.png"
-          alt="Background"
-          fill
-          className="object-cover"
-          priority
-        />
-      </div>
+    <section 
+      className="py-16 relative overflow-hidden"
+      style={{
+        backgroundImage: "url('/BACKGROUND-sport.png')",
+        backgroundSize: "100% 200%",
+        backgroundPosition: "center",
+        backgroundRepeat: "no-repeat",
+      }}
+    >
 
       {/* Athletes image - fixed at bottom of section */}
       <div className="absolute bottom-0 left-0 right-0 z-10">

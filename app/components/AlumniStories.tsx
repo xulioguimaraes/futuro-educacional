@@ -33,7 +33,7 @@ export default function AlumniStories() {
       className="relative w-full py-24 overflow-hidden"
       style={{
         backgroundImage: "url('/BACKGROUND-story.png')",
-        backgroundSize: "cover",
+        backgroundSize: "100% 200%",
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat",
       }}
