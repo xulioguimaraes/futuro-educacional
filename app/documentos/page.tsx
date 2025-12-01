@@ -69,8 +69,17 @@ export default function DocumentosPage() {
       </section>
 
       {/* Documents Section */}
-      <section className="py-24 bg-[#071B48] text-white">
-        <div className="container mx-auto px-4">
+      <section className="relative py-24 text-white overflow-hidden">
+        <div 
+          className="absolute inset-0 w-full h-full"
+          style={{
+            backgroundImage: "url(/BACK-docs.png)",
+            backgroundSize: "100% 200%",
+            backgroundPosition: "center",
+            backgroundRepeat: "no-repeat",
+          }}
+        />
+        <div className="container mx-auto px-4 relative z-10">
           <div className="grid md:grid-cols-2  gap-6">
             {documents.map((doc, index) => (
               <div key={index} className=" rounded-lg p-6 flex  gap-6">
