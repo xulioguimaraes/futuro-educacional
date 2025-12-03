@@ -155,9 +155,59 @@ export default function EnsinoPage() {
       />
 
       {/* Educational Stages Section */}
-      <section className="pt-16 bg-white">
+      <section className="pt-8 md:pt-16 bg-white">
         <div className="container mx-auto px-4">
-          <div className="flex flex-wrap justify-center gap-6">
+          {/* Mobile: Horizontal scroll */}
+          <div className="flex md:hidden overflow-x-auto pb-4 gap-4 -mx-4 px-4 scrollbar-hide">
+            {educationalStages.map((stage, index) => (
+              <div key={index} className="flex flex-col items-center shrink-0">
+                <button
+                  onClick={() => setSelectedStage(index)}
+                  className={`flex relative flex-col items-center cursor-pointer transition-all duration-300 ${
+                    selectedStage === index ? "scale-105" : "hover:opacity-100"
+                  }`}
+                >
+                  <div
+                    className={`relative w-24 h-32 rounded-full overflow-hidden border-2 transition-all duration-300 ${
+                      selectedStage === index
+                        ? "bg-[#1C437F] border-[#1C437F]"
+                        : "border-[#1C437F]"
+                    }`}
+                  >
+                    <Image
+                      src={stage.image}
+                      alt={stage.name}
+                      fill
+                      className="object-scale-down scale-[0.8]"
+                    />
+                  </div>
+                  <span
+                    className={`min-w-[100px] text-xs text-center absolute whitespace-nowrap bottom-6 left-1/2 transform -translate-x-1/2 px-3 py-1.5 rounded-full transition-all duration-300 ${
+                      selectedStage === index
+                        ? "bg-[#FDC938] text-[#1C437F] font-semibold"
+                        : "bg-[#1C437F] text-white font-normal"
+                    }`}
+                  >
+                    {stage.name}
+                  </span>
+                </button>
+                {/* Line indicator */}
+                <div
+                  className={`transition-all duration-300 ${
+                    selectedStage === index ? "opacity-100" : "opacity-0"
+                  }`}
+                  style={{
+                    width: "5px",
+                    height: "40px",
+                    backgroundColor: "#1C437F",
+                  }}
+                ></div>
+              </div>
+            ))}
+          </div>
+
+          {/* Desktop: Original layout */}
+          <div className="hidden md:flex flex-wrap justify-center gap-6">
             {educationalStages.map((stage, index) => (
               <div key={index} className="flex flex-col items-center">
                 <button
@@ -212,7 +262,7 @@ export default function EnsinoPage() {
       </section>
 
       {/* Dynamic Content Section */}
-      <section className="py-20 text-white relative overflow-hidden">
+      <section className="py-12 md:py-20 text-white relative overflow-hidden">
         <div
           className="absolute inset-0 transition-all duration-500"
           style={{
@@ -223,9 +273,9 @@ export default function EnsinoPage() {
           }}
         />
         <div className="container mx-auto px-4 relative z-10">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <div className="relative pl-12">
-              <div className="relative max-w-[480px] h-[600px]">
+          <div className="grid lg:grid-cols-2 gap-8 md:gap-12 items-center">
+            <div className="relative pl-0 md:pl-12 order-2 lg:order-1">
+              <div className="relative max-w-[320px] md:max-w-[480px] h-[400px] md:h-[600px] mx-auto lg:mx-0">
                 <Image
                   src={currentContent.image}
                   alt={currentContent.title}
@@ -234,18 +284,18 @@ export default function EnsinoPage() {
                 />
               </div>
             </div>
-            <div>
-              <h2 className="text-3xl md:text-4xl font-extrabold mb-6">
+            <div className="order-1 lg:order-2 text-center lg:text-left">
+              <h2 className="text-2xl md:text-4xl font-extrabold mb-4 md:mb-6">
                 {currentContent.title}
               </h2>
-              <p className="text-lg text-white/90 font-medium mb-6 leading-relaxed">
+              <p className="text-base md:text-lg text-white/90 font-medium mb-4 md:mb-6 leading-relaxed">
                 {currentContent.description}
               </p>
               <div className="border-t border-[#DEE6F1] my-4"></div>
-              <div className="space-y-4 mb-8">
+              <div className="space-y-3 md:space-y-4 mb-6 md:mb-8 text-left">
                 {currentContent.highlights.map((highlight, index) => (
-                  <div key={index} className="flex items-center gap-1">
-                    <div className="w-5 h-5 bg-[#FDC938] rounded-full mr-2 flex items-center justify-center">
+                  <div key={index} className="flex items-start md:items-center gap-2">
+                    <div className="w-5 h-5 bg-[#FDC938] rounded-full mr-2 flex items-center justify-center shrink-0 mt-0.5 md:mt-0">
                       <svg
                         width="11"
                         height="8"
@@ -259,34 +309,36 @@ export default function EnsinoPage() {
                         />
                       </svg>
                     </div>
-                    <p className="text-white font-medium">{highlight}</p>
+                    <p className="text-white font-medium text-sm md:text-base">{highlight}</p>
                   </div>
                 ))}
               </div>
-              <ButtonWithIcon>Fale conosco</ButtonWithIcon>
+              <div className="flex justify-center lg:justify-start">
+                <ButtonWithIcon>Fale conosco</ButtonWithIcon>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
       {/* Section 1 - Dynamic */}
-      <section className="pt-20 pb-5 bg-white">
+      <section className="pt-12 md:pt-20 pb-5 bg-white">
         <div className="container mx-auto px-4">
-          <div className="grid lg:grid-cols-2 gap-4 items-center">
-            <div>
-              <h2 className="text-3xl md:text-4xl font-extrabold text-[#1e3a5f] mb-4">
+          <div className="grid lg:grid-cols-2 gap-6 md:gap-8 items-center">
+            <div className="text-center lg:text-left">
+              <h2 className="text-2xl md:text-4xl font-extrabold text-[#1e3a5f] mb-3 md:mb-4">
                 {currentContent.section1.title}
               </h2>
-              <p className="text-lg text-[#504E4E] leading-relaxed max-w-[480px]">
+              <p className="text-base md:text-lg text-[#504E4E] leading-relaxed max-w-[480px] mx-auto lg:mx-0">
                 {currentContent.section1.description}
               </p>
             </div>
-            <div className="flex justify-center lg:justify-end">
-              <div className="relative max-w-[560px] w-full">
-                {/* 2 bordas decorativas do lado direito */}
-                <div className="absolute top-0 h-56 right-[28px] w-full rounded-full border-2 border-[#FDC938]"></div>
-                <div className="absolute top-0 h-56 right-[14px] w-full rounded-full border-2 border-[#1C437F]"></div>
-                <div className="relative w-full h-56 rounded-full overflow-hidden">
+            <div className="flex justify-center lg:justify-end mt-6 lg:mt-0">
+              <div className="relative max-w-[400px] md:max-w-[560px] w-full">
+                {/* 2 bordas decorativas do lado direito - hidden on mobile */}
+                <div className="hidden md:block absolute top-0 h-56 right-[28px] w-full rounded-full border-2 border-[#FDC938]"></div>
+                <div className="hidden md:block absolute top-0 h-56 right-[14px] w-full rounded-full border-2 border-[#1C437F]"></div>
+                <div className="relative w-full h-48 md:h-56 rounded-full overflow-hidden">
                   <Image
                     src={currentContent.section1.image}
                     alt={currentContent.section1.title}
@@ -301,15 +353,15 @@ export default function EnsinoPage() {
       </section>
 
       {/* Section 2 - Dynamic */}
-      <section className="pt-5 pb-20 bg-white">
+      <section className="pt-5 pb-12 md:pb-20 bg-white">
         <div className="container mx-auto px-4">
-          <div className="grid lg:grid-cols-2 gap-4 items-center">
-            <div className="flex justify-center lg:justify-start order-2 lg:order-1">
-              <div className="relative max-w-[560px] w-full">
-                {/* 2 bordas decorativas do lado esquerdo */}
-                <div className="absolute top-0 left-[28px] w-full h-56 rounded-full border-2 border-[#FDC938]"></div>
-                <div className="absolute top-0 left-[14px] w-full h-56 rounded-full border-2 border-[#1C437F]"></div>
-                <div className="relative w-full h-56 rounded-full overflow-hidden">
+          <div className="grid lg:grid-cols-2 gap-6 md:gap-8 items-center">
+            <div className="flex justify-center lg:justify-start order-2 lg:order-1 mt-6 lg:mt-0">
+              <div className="relative max-w-[400px] md:max-w-[560px] w-full">
+                {/* 2 bordas decorativas do lado esquerdo - hidden on mobile */}
+                <div className="hidden md:block absolute top-0 left-[28px] w-full h-56 rounded-full border-2 border-[#FDC938]"></div>
+                <div className="hidden md:block absolute top-0 left-[14px] w-full h-56 rounded-full border-2 border-[#1C437F]"></div>
+                <div className="relative w-full h-48 md:h-56 rounded-full overflow-hidden">
                   <Image
                     src={currentContent.section2.image}
                     alt={currentContent.section2.title}
@@ -319,11 +371,11 @@ export default function EnsinoPage() {
                 </div>
               </div>
             </div>
-            <div className="order-1 lg:order-2 ml-12">
-              <h2 className="text-3xl md:text-4xl font-extrabold text-[#1e3a5f] mb-4">
+            <div className="order-1 lg:order-2 ml-0 lg:ml-12 text-center lg:text-left">
+              <h2 className="text-2xl md:text-4xl font-extrabold text-[#1e3a5f] mb-3 md:mb-4">
                 {currentContent.section2.title}
               </h2>
-              <p className="text-lg text-[#504E4E] leading-relaxed">
+              <p className="text-base md:text-lg text-[#504E4E] leading-relaxed">
                 {currentContent.section2.description}
               </p>
             </div>

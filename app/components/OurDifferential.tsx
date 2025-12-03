@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import ButtonWithIcon from "./ButtonWithIcon";
 
 type DifferentialCard = {
@@ -40,8 +40,19 @@ export default function OurDifferential() {
     },
   ];
 
-  const CARD_WIDTH = 268;
-  const CARD_GAP = 24;
+  // Responsive card sizes
+  const [isMobile, setIsMobile] = useState(false);
+  
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
+  const CARD_WIDTH = isMobile ? 220 : 268;
+  const CARD_HEIGHT = isMobile ? 320 : 401;
+  const CARD_GAP = isMobile ? 16 : 24;
   const ITEM_SIZE = CARD_WIDTH + CARD_GAP;
 
   const duplicatedDifferentials: DifferentialCard[] = [
@@ -71,16 +82,16 @@ export default function OurDifferential() {
   };
 
   return (
-    <section className="py-16 bg-white">
-      <div className="container mx-auto ">
-        <div className="text-center mb-12">
+    <section className="py-10 md:py-16 bg-white">
+      <div className="container mx-auto px-4">
+        <div className="text-center mb-8 md:mb-12">
           <span
-            className="bg-[#1C437F] mb-8 text-white rounded-full px-4 py-2 font-semibold inline-block uppercase tracking-wide"
+            className="bg-[#1C437F] mb-6 md:mb-8 text-white rounded-full px-4 py-2 font-semibold inline-block uppercase tracking-wide text-sm"
             style={{ fontFamily: "var(--font-poppins)" }}
           >
             Nosso diferencial
           </span>
-          <h2 className="text-3xl md:text-4xl mt-2 mb-4 max-w-[1064px] mx-auto">
+          <h2 className="text-2xl md:text-4xl mt-2 mb-4 max-w-[1064px] mx-auto px-2">
             Com uma{" "}
             <span className="font-extrabold text-[#1e3a5f]">
               educação transformadora
@@ -91,22 +102,26 @@ export default function OurDifferential() {
 
         <div className="relative overflow-hidden">
           <div
-            className="flex gap-4 flex-nowrap pb-4 transition-transform duration-500 ease-out"
+            className="flex flex-nowrap pb-4 transition-transform duration-500 ease-out"
             style={{
-              transform: `translateX(calc(50% - 134px - ${
+              gap: `${CARD_GAP}px`,
+              transform: `translateX(calc(50% - ${CARD_WIDTH / 2}px - ${
                 currentIndex * ITEM_SIZE
               }px))`,
             }}
           >
             {duplicatedDifferentials.map((item, index) => {
-              const isCenter = index === currentIndex;
               const isGhost =
                 index < originalLength || index >= originalLength * 2;
 
               return (
                 <div
                   key={`${item.title}-${index}`}
-                  className="shrink-0 w-[268px] h-[401px] rounded-[24px] overflow-hidden relative text-white flex-none transition-all duration-500"
+                  className="shrink-0 rounded-[24px] overflow-hidden relative text-white flex-none transition-all duration-500"
+                  style={{
+                    width: `${CARD_WIDTH}px`,
+                    height: `${CARD_HEIGHT}px`,
+                  }}
                   aria-hidden={isGhost}
                 >
                   {item.imageSrc ? (
@@ -114,7 +129,7 @@ export default function OurDifferential() {
                       src={item.imageSrc}
                       alt={item.imageAlt ?? item.title}
                       fill
-                      sizes="(max-width: 768px) 268px, 268px"
+                      sizes={`(max-width: 768px) ${CARD_WIDTH}px, 268px`}
                       className="object-cover"
                       priority={index === currentIndex}
                     />
@@ -130,9 +145,9 @@ export default function OurDifferential() {
                         "linear-gradient(180deg, rgba(0, 57, 199, 0) 46.63%, rgba(0, 83, 211, 0.85) 85%)",
                     }}
                   />
-                  <div className="relative z-10 h-full flex flex-col justify-end text-center px-4 py-8">
+                  <div className="relative z-10 h-full flex flex-col justify-end text-center px-3 md:px-4 py-6 md:py-8">
                     <div>
-                    <h3 className="text-[18px] font-bold leading-snug pb-3">
+                      <h3 className="text-[14px] md:text-[18px] font-bold leading-snug pb-2 md:pb-3">
                         {item.title}
                       </h3>
                     </div>
@@ -145,21 +160,67 @@ export default function OurDifferential() {
             })}
           </div>
 
-          {/* Side gradients */}
+          {/* Side gradients - smaller on mobile */}
           <div 
-            className="pointer-events-none absolute left-0 top-0 h-full w-72"
+            className="pointer-events-none absolute left-0 top-0 h-full w-16 md:w-72"
             style={{
               background: 'linear-gradient(to right, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0.9) 50%, rgba(255, 255, 255, 0) 100%)'
             }}
           />
           <div 
-              className="pointer-events-none absolute right-0 top-0 h-full w-72"
+            className="pointer-events-none absolute right-0 top-0 h-full w-16 md:w-72"
             style={{
               background: 'linear-gradient(to left, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0.9) 50%, rgba(255, 255, 255, 0) 100%)'
             }}
           />
 
-          {/* Navigation arrows */}
+          {/* Navigation arrows - Mobile (below carousel) */}
+          <div className="flex justify-center gap-4 mt-6 md:hidden">
+            <button
+              onClick={() => handleNavigation("prev")}
+              className="w-10 h-10 flex items-center justify-center bg-[#1C437F] rounded-full shadow-md"
+              aria-label="Ver diferencial anterior"
+            >
+              <svg
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M15 18L9 12L15 6"
+                  stroke="white"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+            </button>
+            <button
+              onClick={() => handleNavigation("next")}
+              className="w-10 h-10 flex items-center justify-center bg-[#1C437F] rounded-full shadow-md"
+              aria-label="Ver próximo diferencial"
+            >
+              <svg
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M9 18L15 12L9 6"
+                  stroke="white"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+            </button>
+          </div>
+
+          {/* Navigation arrows - Desktop */}
           <button
             onClick={() => handleNavigation("prev")}
             className="absolute left-0 top-1/2 transform -translate-y-1/2 hidden md:block"

@@ -1,7 +1,5 @@
 "use client";
 
-"use client";
-
 import React, { useState } from "react";
 import Image from "next/image";
 import ButtonWithIcon from "./ButtonWithIcon";
@@ -22,8 +20,9 @@ export default function ContactForm() {
     const formatted = formatPhone(e.target.value);
     setPhone(formatted);
   };
+
   return (
-    <section className=" relative overflow-hidden">
+    <section className="relative overflow-hidden">
       {/* Background image */}
       <div className="absolute inset-0">
         <Image
@@ -36,20 +35,20 @@ export default function ContactForm() {
       </div>
 
       <div className="container mx-auto px-4 relative z-10">
-        <div className="flex flex-col md:flex-row gap-12">
+        <div className="flex flex-col md:flex-row gap-8 md:gap-12">
           {/* Left side - Form */}
-          <div className="flex-1 w-full py-16">
-            <div className="mb-6">
+          <div className="flex-1 w-full py-10 md:py-16">
+            <div className="mb-6 text-center md:text-left">
               <span className="text-sm font-bold text-[#1C437F] uppercase">
                 ENTRE EM CONTATO
               </span>
-              <h2 className="text-3xl md:text-4xl font-extrabold text-[#253858] mt-2">
+              <h2 className="text-2xl md:text-3xl lg:text-4xl font-extrabold text-[#253858] mt-2">
                 Deixe-nos uma mensagem
               </h2>
             </div>
 
             <form
-              className="bg-[#1C437F] rounded-[30px] py-8 px-12 text-white"
+              className="bg-[#1C437F] rounded-[20px] md:rounded-[30px] py-6 md:py-8 px-6 md:px-12 text-white"
               style={{
                 boxShadow: "10px 10px 15px 0px #00000033",
               }}
@@ -62,7 +61,7 @@ export default function ContactForm() {
                   <input
                     type="text"
                     placeholder="Nome"
-                    className="w-full px-6 py-4 rounded-[10px] bg-white text-[#1e3a5f] focus:outline-none focus:ring-2 focus:ring-[#fbbf24] placeholder-[#A9A9A9]"
+                    className="w-full px-4 md:px-6 py-3 md:py-4 rounded-[10px] bg-white text-[#1e3a5f] focus:outline-none focus:ring-2 focus:ring-[#fbbf24] placeholder-[#A9A9A9] text-sm md:text-base"
                   />
                 </div>
                 <div>
@@ -72,7 +71,7 @@ export default function ContactForm() {
                   <input
                     type="text"
                     placeholder="Sobrenome"
-                    className="w-full px-6 py-4 rounded-[10px] bg-white text-[#1e3a5f] focus:outline-none focus:ring-2 focus:ring-[#fbbf24] placeholder-[#A9A9A9]"
+                    className="w-full px-4 md:px-6 py-3 md:py-4 rounded-[10px] bg-white text-[#1e3a5f] focus:outline-none focus:ring-2 focus:ring-[#fbbf24] placeholder-[#A9A9A9] text-sm md:text-base"
                   />
                 </div>
               </div>
@@ -87,7 +86,7 @@ export default function ContactForm() {
                     onChange={handlePhoneChange}
                     placeholder="(00) 00000-0000"
                     maxLength={15}
-                    className="w-full px-6 py-4 rounded-[10px] bg-white text-[#1e3a5f] focus:outline-none focus:ring-2 focus:ring-[#fbbf24] placeholder-[#A9A9A9]"
+                    className="w-full px-4 md:px-6 py-3 md:py-4 rounded-[10px] bg-white text-[#1e3a5f] focus:outline-none focus:ring-2 focus:ring-[#fbbf24] placeholder-[#A9A9A9] text-sm md:text-base"
                   />
                 </div>
                 <div>
@@ -97,7 +96,7 @@ export default function ContactForm() {
                   <input
                     type="email"
                     placeholder="email@exemplo.com"
-                    className="w-full px-6 py-4 rounded-[10px] bg-white text-[#1e3a5f] focus:outline-none focus:ring-2 focus:ring-[#fbbf24] placeholder-[#A9A9A9]"
+                    className="w-full px-4 md:px-6 py-3 md:py-4 rounded-[10px] bg-white text-[#1e3a5f] focus:outline-none focus:ring-2 focus:ring-[#fbbf24] placeholder-[#A9A9A9] text-sm md:text-base"
                   />
                 </div>
               </div>
@@ -109,7 +108,7 @@ export default function ContactForm() {
                 <textarea
                   rows={4}
                   placeholder="Sua mensagem aqui..."
-                  className="w-full px-6 py-4 rounded-[10px] bg-white text-[#1e3a5f] focus:outline-none focus:ring-2 focus:ring-[#fbbf24] placeholder-[#A9A9A9]"
+                  className="w-full px-4 md:px-6 py-3 md:py-4 rounded-[10px] bg-white text-[#1e3a5f] focus:outline-none focus:ring-2 focus:ring-[#fbbf24] placeholder-[#A9A9A9] text-sm md:text-base"
                 ></textarea>
               </div>
               <div className="flex justify-center">
@@ -120,7 +119,7 @@ export default function ContactForm() {
 
           {/* Right side - Image */}
           <div className="flex-1 hidden md:block relative z-20 self-end">
-            <div className="relative w-full h-[700px]">
+            <div className="relative w-full h-[500px] lg:h-[700px]">
               <Image
                 src="/homem-contato.png"
                 alt="Colaborador"

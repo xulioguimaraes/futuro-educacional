@@ -1,17 +1,30 @@
-import React from "react";
+"use client";
+
+import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import Navigation from "./Navigation";
 
 export default function Header() {
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  const mobileNavItems = [
+    { label: "Nosso Grupo", href: "/nosso-grupo" },
+    { label: "Ensino", href: "/ensino" },
+    { label: "Documentos", href: "/documentos" },
+    { label: "Trabalhe Conosco", href: "/trabalhe-conosco" },
+    { label: "Blog", href: "/blog" },
+    { label: "Contato", href: "#contato" },
+  ];
+
   return (
     <>
-      {/* Top Contact Bar */}
-      <div className="relative z-30 ">
+      {/* Top Contact Bar - Hidden on mobile */}
+      <div className="relative z-30 hidden md:block">
         <div className="container mx-auto fixed top-0 left-0 right-0">
           <div className="bg-[#001545] text-white text-sm py-2">
-            <div className="container mx-auto px-8 flex justify-between items-center gap-6">
-              <div className="flex items-center gap-6">
+            <div className="container mx-auto px-4 md:px-8 flex justify-between items-center gap-6">
+              <div className="flex items-center gap-4 md:gap-6 flex-wrap">
                 <div className="flex items-center gap-2">
                   <Image
                     src="/phone.png"
@@ -20,7 +33,7 @@ export default function Header() {
                     height={16}
                     className="object-scale-down"
                   />
-                  <span>(94) 98100-0798</span>
+                  <span className="text-xs md:text-sm">(94) 98100-0798</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <Image
@@ -30,7 +43,9 @@ export default function Header() {
                     height={16}
                     className="object-scale-down"
                   />
-                  <span>contato@grupofuturoeducacional.com.br</span>
+                  <span className="text-xs md:text-sm hidden sm:inline">
+                    contato@grupofuturoeducacional.com.br
+                  </span>
                 </div>
               </div>
               {/* Social Media Icons */}
@@ -90,21 +105,109 @@ export default function Header() {
       </div>
 
       {/* Main Navigation Bar */}
-      <nav className=" relative z-20 text-white">
-        <div className="container fixed top-[35px] left-0 right-0 rounded-b-[30px] mx-auto px-8 flex items-center justify-between bg-gradient-to-r from-[#001F63] to-[#002576]">
+      <nav className="relative z-20 text-white">
+        <div className="container fixed top-0 md:top-[35px] left-0 right-0 md:rounded-b-[30px] mx-auto px-4 md:px-8 flex items-center justify-between bg-linear-to-r from-[#001F63] to-[#002576]">
           {/* Logo */}
-          <Link href="/" className="flex items-center ">
+          <Link href="/" className="flex items-center">
             <Image
               src="/logo-futuro.png"
               alt="Grupo Futuro Educacional"
               width={230}
               height={60}
-              className="h-[100px] object-cover"
+              className="h-[70px] md:h-[100px] w-auto object-contain"
             />
           </Link>
 
-          {/* Navigation Links */}
+          {/* Desktop Navigation Links */}
           <Navigation />
+
+          {/* Mobile Menu Button */}
+          <button
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            className="lg:hidden p-2 text-white"
+            aria-label="Menu"
+          >
+            {isMobileMenuOpen ? (
+              <svg
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M18 6L6 18M6 6L18 18"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+            ) : (
+              <svg
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M3 12H21M3 6H21M3 18H21"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+            )}
+          </button>
+        </div>
+
+        {/* Mobile Menu Overlay */}
+        {isMobileMenuOpen && (
+          <div
+            className="fixed inset-0 bg-black/50 z-40 lg:hidden"
+            onClick={() => setIsMobileMenuOpen(false)}
+          />
+        )}
+
+        {/* Mobile Menu */}
+        <div
+          className={`fixed top-[70px] left-0 right-0 bg-gradient-to-b from-[#001F63] to-[#002576] z-50 lg:hidden transition-all duration-300 ${
+            isMobileMenuOpen
+              ? "opacity-100 translate-y-0"
+              : "opacity-0 -translate-y-full pointer-events-none"
+          }`}
+        >
+          <div className="container mx-auto px-4 py-6">
+            <div className="flex flex-col gap-4">
+              {mobileNavItems.map((item) => (
+                <Link
+                  key={item.label}
+                  href={item.href}
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="text-white text-lg font-medium py-3 px-4 rounded-lg hover:bg-white/10 transition-colors border-b border-white/10"
+                >
+                  {item.label}
+                </Link>
+              ))}
+            </div>
+            {/* Mobile Social Icons */}
+            <div className="flex items-center justify-center gap-6 mt-6 pt-6 border-t border-white/20">
+              <a href="#" className="w-8 h-8 flex items-center justify-center">
+                <Image src="/fb.svg" alt="Facebook" width={20} height={20} />
+              </a>
+              <a href="#" className="w-8 h-8 flex items-center justify-center">
+                <Image src="/in.svg" alt="LinkedIn" width={20} height={20} />
+              </a>
+              <a href="#" className="w-8 h-8 flex items-center justify-center">
+                <Image src="/x.svg" alt="Twitter/X" width={20} height={20} />
+              </a>
+              <a href="#" className="w-8 h-8 flex items-center justify-center">
+                <Image src="/yt.svg" alt="YouTube" width={20} height={20} />
+              </a>
+            </div>
+          </div>
         </div>
       </nav>
     </>

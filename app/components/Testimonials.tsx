@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 export default function Testimonials() {
   const testimonials = [
@@ -25,10 +25,20 @@ export default function Testimonials() {
     },
   ];
 
-  const CARD_WIDTH = 320;
-  const CARD_GAP = 16;
+  // Responsive card sizes
+  const [isMobile, setIsMobile] = useState(false);
+  
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
+  const CARD_WIDTH = isMobile ? 280 : 320;
+  const CARD_GAP = isMobile ? 12 : 16;
   const ITEM_SIZE = CARD_WIDTH + CARD_GAP;
-  const VISIBLE_COUNT = 2.5;
+  const VISIBLE_COUNT = isMobile ? 1.2 : 2.5;
   const SLIDER_MAX_WIDTH = CARD_WIDTH * VISIBLE_COUNT + CARD_GAP * 2;
 
   const originalLength = testimonials.length;
@@ -59,7 +69,7 @@ export default function Testimonials() {
 
   return (
     <section
-      className="py-20 relative overflow-hidden min-h-[580px] h-full"
+      className="py-12 md:py-20 relative overflow-hidden min-h-[480px] md:min-h-[580px] h-full"
       style={{
         backgroundImage: "url('/BACKGROUND-testemunho.png')",
         backgroundSize: "cover",
@@ -68,25 +78,29 @@ export default function Testimonials() {
       }}
     >
       <div className="container mx-auto px-4 relative z-10">
-        <div className="flex flex-col md:flex-row items-center gap-12">
+        <div className="flex flex-col md:flex-row items-center gap-8 md:gap-12">
           {/* Left side - Testimonials */}
-          <div className="flex-1 w-full max-w-3xl ">
-            <div className="mb-6">
+          <div className="flex-1 w-full max-w-3xl">
+            <div className="mb-6 text-center md:text-left">
               <span className="text-sm font-bold text-[#1C437F] uppercase">
                 TESTEMUNHOS
               </span>
-              <h2 className="text-3xl md:text-4xl font-bold text-[#17012C] mt-2">
+              <h2 className="text-2xl md:text-4xl font-bold text-[#17012C] mt-2">
                 O que estão falando sobre nós
               </h2>
             </div>
 
-            <div className="relative max-w-full pl-[40px]">
+            <div className="relative max-w-full pl-0 md:pl-[40px]">
               <div
                 className="overflow-hidden mx-auto"
                 style={{ 
                   maxWidth: `${SLIDER_MAX_WIDTH}px`,
-                  WebkitMaskImage: 'linear-gradient(to right, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 1) 70%, rgba(0, 0, 0, 0.3) 90%, rgba(0, 0, 0, 0) 100%)',
-                  maskImage: 'linear-gradient(to right, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 1) 70%, rgba(0, 0, 0, 0.3) 90%, rgba(0, 0, 0, 0) 100%)',
+                  WebkitMaskImage: isMobile 
+                    ? 'linear-gradient(to right, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 1) 85%, rgba(0, 0, 0, 0) 100%)'
+                    : 'linear-gradient(to right, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 1) 70%, rgba(0, 0, 0, 0.3) 90%, rgba(0, 0, 0, 0) 100%)',
+                  maskImage: isMobile 
+                    ? 'linear-gradient(to right, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 1) 85%, rgba(0, 0, 0, 0) 100%)'
+                    : 'linear-gradient(to right, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 1) 70%, rgba(0, 0, 0, 0.3) 90%, rgba(0, 0, 0, 0) 100%)',
                 }}
               >
                 <div
@@ -108,15 +122,15 @@ export default function Testimonials() {
                         index < originalLength || index >= originalLength * 2
                       }
                     >
-                      <div className="w-full bg-white rounded-2xl p-6 h-full flex flex-col justify-between">
-                        <div className="mb-6">
+                      <div className="w-full bg-white rounded-2xl p-4 md:p-6 h-full flex flex-col justify-between">
+                        <div className="mb-4 md:mb-6">
                           <div className="flex items-center justify-between">
                             {/* Stars */}
-                            <div className="flex gap-1 mb-4">
+                            <div className="flex gap-1 mb-3 md:mb-4">
                               {[...Array(5)].map((_, i) => (
                                 <svg
                                   key={i}
-                                  className="w-5 h-5 text-[#fbbf24]"
+                                  className="w-4 h-4 md:w-5 md:h-5 text-[#fbbf24]"
                                   fill="currentColor"
                                   viewBox="0 0 20 20"
                                 >
@@ -126,32 +140,32 @@ export default function Testimonials() {
                             </div>
 
                             {/* Quote icon */}
-                            <div className="mb-4">
+                            <div className="mb-3 md:mb-4">
                               <Image
                                 src="/aspas.svg"
                                 alt="Ícone de aspas"
                                 width={44}
                                 height={38}
-                                className="w-11 h-auto"
+                                className="w-8 md:w-11 h-auto"
                               />
                             </div>
                           </div>
 
                           {/* Testimonial text */}
-                          <p className="text-gray-700 mb-6 italic">
+                          <p className="text-gray-700 mb-4 md:mb-6 italic text-sm md:text-base">
                             {testimonial.text}
                           </p>
                         </div>
                         {/* Author */}
                         <div className="flex items-center gap-3 mt-auto">
-                          <div className="w-12 h-12 rounded-full bg-blue-300 flex items-center justify-center text-white font-bold">
+                          <div className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-blue-300 flex items-center justify-center text-white font-bold text-sm md:text-base">
                             {testimonial.avatar}
                           </div>
                           <div>
-                            <p className="font-semibold text-[#1e3a5f]">
+                            <p className="font-semibold text-[#1e3a5f] text-sm md:text-base">
                               {testimonial.author}
                             </p>
-                            <p className="text-sm text-gray-500">
+                            <p className="text-xs md:text-sm text-gray-500">
                               {testimonial.role}
                             </p>
                           </div>
@@ -162,7 +176,53 @@ export default function Testimonials() {
                 </div>
               </div>
 
-              {/* Navigation arrows */}
+              {/* Navigation arrows - Mobile */}
+              <div className="flex justify-center gap-4 mt-6 md:hidden">
+                <button
+                  onClick={() => handleNavigation("prev")}
+                  className="w-10 h-10 flex items-center justify-center bg-white rounded-full shadow-md"
+                  aria-label="Depoimento anterior"
+                >
+                  <svg
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M15 18L9 12L15 6"
+                      stroke="#001F63"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
+                </button>
+                <button
+                  onClick={() => handleNavigation("next")}
+                  className="w-10 h-10 flex items-center justify-center bg-white rounded-full shadow-md"
+                  aria-label="Próximo depoimento"
+                >
+                  <svg
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M9 18L15 12L9 6"
+                      stroke="#001F63"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
+                </button>
+              </div>
+
+              {/* Navigation arrows - Desktop */}
               <button
                 onClick={() => handleNavigation("prev")}
                 className="absolute -left-4 top-1/2 transform -translate-y-1/2 hidden md:block"

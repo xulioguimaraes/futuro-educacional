@@ -11,11 +11,11 @@ export default function EducationalStages() {
   ];
 
   return (
-    <section className="py-16 bg-white rounded-s-full">
+    <section className="py-10 md:py-16 bg-white rounded-s-full">
       <div className="container mx-auto px-4">
-        <div className="text-center mb-12">
+        <div className="text-center mb-8 md:mb-12">
           <span
-            className="bg-[#1C437F] mb-8 text-white rounded-full px-4 py-2 font-semibold  inline-block"
+            className="bg-[#1C437F] mb-4 md:mb-8 text-white rounded-full px-3 md:px-4 py-2 font-semibold inline-block text-sm md:text-base"
             style={{
               fontFamily: "var(--font-poppins)",
               lineHeight: "100%",
@@ -24,25 +24,25 @@ export default function EducationalStages() {
           >
             Matrículas 2026
           </span>
-          <h2 className="text-3xl md:text-4xl mt-2 mb-4 max-w-[950px] mx-auto">
+          <h2 className="text-2xl md:text-3xl lg:text-4xl mt-2 mb-4 max-w-[950px] mx-auto px-2">
             Conheça o{" "}
-            <span className="font-extrabold text-[#1e3a5f] ">
+            <span className="font-extrabold text-[#1e3a5f]">
               Grupo Futuro Educacional{" "}
             </span>
             e transforme o futuro do seu filho com a gente!
           </h2>
         </div>
 
-        <div className="flex flex-wrap justify-center gap-6">
+        <div className="flex flex-wrap justify-center gap-4 md:gap-6">
           {stages.map((stage, index) => (
             <div key={index} className="relative">
-              <div className="w-full h-full flex flex-col items-center justify-center ">
+              <div className="w-full h-full flex flex-col items-center justify-center">
                 <Image
                   src={stage.image}
                   alt={stage.name}
                   width={180}
                   height={60}
-                  className="object-contain"
+                  className="object-contain w-[120px] md:w-[150px] lg:w-[180px] h-auto"
                 />
               </div>
             </div>

@@ -46,10 +46,10 @@ export default function DocumentosPage() {
       />
 
       {/* Introductory Text Section */}
-      <section className="py-16 bg-white">
+      <section className="py-10 md:py-16 bg-white">
         <div className="container mx-auto px-4">
           <div className="max-w-[850px] mx-auto text-center">
-            <p className="text-lg text-[#17012C] font-medium leading-relaxed mb-8">
+            <p className="text-base md:text-lg text-[#17012C] font-medium leading-relaxed mb-6 md:mb-8">
               Nesta área, você encontra todos os arquivos essenciais para a sua
               jornada acadêmica. Organizamos os documentos em categorias para
               facilitar o acesso e garantir que você tenha à disposição tudo o
@@ -61,7 +61,7 @@ export default function DocumentosPage() {
                 alt="Scroll indicator"
                 width={50}
                 height={50}
-                className="object-contain"
+                className="object-contain w-10 h-10 md:w-[50px] md:h-[50px]"
               />
             </div>
           </div>
@@ -69,7 +69,7 @@ export default function DocumentosPage() {
       </section>
 
       {/* Documents Section */}
-      <section className="relative py-24 text-white overflow-hidden">
+      <section className="relative py-12 md:py-24 text-white overflow-hidden">
         <div 
           className="absolute inset-0 w-full h-full"
           style={{
@@ -80,31 +80,31 @@ export default function DocumentosPage() {
           }}
         />
         <div className="container mx-auto px-4 relative z-10">
-          <div className="grid md:grid-cols-2  gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
             {documents.map((doc, index) => (
-              <div key={index} className=" rounded-lg p-6 flex  gap-6">
-                <div className="shrink-0">
+              <div key={index} className="rounded-lg p-4 md:p-6 flex flex-col md:flex-row gap-4 md:gap-6">
+                <div className="shrink-0 flex justify-center md:justify-start">
                   <Image
                     src="/icon-pdf.svg"
                     alt="PDF icon"
                     width={84}
                     height={104}
-                    className="object-contain"
+                    className="object-contain w-16 h-20 md:w-[84px] md:h-[104px]"
                   />
                 </div>
-                <div>
-                  <div className="flex items-start gap-4 mb-4">
+                <div className="text-center md:text-left">
+                  <div className="flex items-start gap-4 mb-3 md:mb-4">
                     <div className="flex-1">
-                      <h3 className="text-3xl font-extrabold text-white mb-2">
+                      <h3 className="text-xl md:text-3xl font-extrabold text-white mb-2">
                         {doc.title}
                       </h3>
-                      <p className="text-lg text-white/80 leading-relaxed">
+                      <p className="text-base md:text-lg text-white/80 leading-relaxed">
                         {doc.description}
                       </p>
                     </div>
                   </div>
-                  <div className="border-t-[3px] border-[#FDC938] my-4"></div>
-                  <div className="mt-auto">
+                  <div className="border-t-[3px] border-[#FDC938] my-3 md:my-4"></div>
+                  <div className="mt-auto flex justify-center md:justify-start">
                     <ButtonWithIcon>Baixar PDF</ButtonWithIcon>
                   </div>
                 </div>
