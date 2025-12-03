@@ -7,11 +7,11 @@ import ButtonWithIcon from "../components/ButtonWithIcon";
 import { useState } from "react";
 
 const educationalStages = [
-  { name: "Infantil", image: "/crianças/crianca1.jpg" },
-  { name: "Fundamental I", image: "/crianças/crianca2.jpg" },
-  { name: "Fundamental II", image: "/crianças/crianca3.jpg" },
-  { name: "Ensino Médio", image: "/crianças/crianca4.jpg" },
-  { name: "Cursinho", image: "/crianças/crianca5.jpg" },
+  { name: "Infantil", image: "/crianças/1.png" },
+  { name: "Fundamental I", image: "/crianças/2.png" },
+  { name: "Fundamental II", image: "/crianças/3.png" },
+  { name: "Ensino Médio", image: "/crianças/4.png" },
+  { name: "Cursinho", image: "/crianças/5.png" },
 ];
 
 const stageContent = [
@@ -217,25 +217,33 @@ export default function EnsinoPage() {
                   }`}
                 >
                   <div
-                    className={`relative w-40 h-56 rounded-full overflow-hidden border-2 transition-all duration-300 ${
+                    className={`relative w-40 h-60 rounded-full overflow-hidden border-2 transition-all duration-300 ${
                       selectedStage === index
                         ? "bg-[#1C437F] border-[#1C437F]"
                         : "border-[#1C437F]"
                     }`}
                   >
-                    <Image
-                      src={stage.image}
-                      alt={stage.name}
-                      fill
-                      className="object-scale-down scale-[0.8]"
-                    />
+                    <div
+                      className="absolute inset-0"
+                      style={{
+                        maskImage: "linear-gradient(to bottom, black 75%, transparent 75%)",
+                        WebkitMaskImage: "linear-gradient(to bottom, black 75%, transparent 75%)",
+                      }}
+                    >
+                      <Image
+                        src={stage.image}
+                        alt={stage.name}
+                        fill
+                        className="object-cover object-top scale-[0.8]"
+                      />
+                    </div>
                   </div>
                   <span
                     className={`${
                       index === 0 || index === 4
                         ? "min-w-[135px]"
                         : "min-w-[170px]"
-                    } text-sm text-center absolute whitespace-nowrap bottom-11 left-1/2 transform -translate-x-1/2  px-4 py-2 rounded-full transition-all duration-300 ${
+                    } text-sm text-center absolute whitespace-nowrap bottom-8 left-1/2 transform -translate-x-1/2 px-4 py-2 rounded-full transition-all duration-300 ${
                       selectedStage === index
                         ? "bg-[#FDC938] text-[#1C437F] font-semibold"
                         : "bg-[#1C437F] text-white font-normal "
@@ -246,7 +254,7 @@ export default function EnsinoPage() {
                 </button>
                 {/* Line indicator */}
                 <div
-                  className={`transition-all duration-300 ${
+                  className={`transition-all duration-300 relative ${
                     selectedStage === index ? "opacity-100" : "opacity-0"
                   }`}
                   style={{
@@ -254,7 +262,10 @@ export default function EnsinoPage() {
                     height: "64px",
                     backgroundColor: "#1C437F",
                   }}
-                ></div>
+                >
+                  <div className="absolute top-[-5px] left-1/2 transform -translate-x-1/2 w-4 h-4 rounded-full bg-[#1C437F]"></div>
+                  <div className="absolute bottom-[-10px] left-1/2 transform -translate-x-1/2 w-4 h-4 rounded-full bg-[#1C437F]"></div>
+                </div>
               </div>
             ))}
           </div>
@@ -264,7 +275,7 @@ export default function EnsinoPage() {
       {/* Dynamic Content Section */}
       <section className="py-12 md:py-20 text-white relative overflow-hidden">
         <div
-          className="absolute inset-0 transition-all duration-500"
+          className="absolute inset-0 transition-all duration-500 mt-[-80px]"
           style={{
             backgroundImage: `url(${currentContent.background})`,
             backgroundSize: "cover",
@@ -294,7 +305,10 @@ export default function EnsinoPage() {
               <div className="border-t border-[#DEE6F1] my-4"></div>
               <div className="space-y-3 md:space-y-4 mb-6 md:mb-8 text-left">
                 {currentContent.highlights.map((highlight, index) => (
-                  <div key={index} className="flex items-start md:items-center gap-2">
+                  <div
+                    key={index}
+                    className="flex items-start md:items-center gap-2"
+                  >
                     <div className="w-5 h-5 bg-[#FDC938] rounded-full mr-2 flex items-center justify-center shrink-0 mt-0.5 md:mt-0">
                       <svg
                         width="11"
@@ -309,7 +323,9 @@ export default function EnsinoPage() {
                         />
                       </svg>
                     </div>
-                    <p className="text-white font-medium text-sm md:text-base">{highlight}</p>
+                    <p className="text-white font-medium text-sm md:text-base">
+                      {highlight}
+                    </p>
                   </div>
                 ))}
               </div>
@@ -322,7 +338,7 @@ export default function EnsinoPage() {
       </section>
 
       {/* Section 1 - Dynamic */}
-      <section className="pt-12 md:pt-20 pb-5 bg-white">
+      <section className="pt-12 md:pt-20 pb-5  bg-white">
         <div className="container mx-auto px-4">
           <div className="grid lg:grid-cols-2 gap-6 md:gap-8 items-center">
             <div className="text-center lg:text-left">
