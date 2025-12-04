@@ -8,6 +8,7 @@ import {
   latestBlogPostsQuery,
   categoriesQuery,
 } from "./queries";
+import type { PortableTextBlock } from "@portabletext/types";
 
 // Types
 export interface Document {
@@ -22,7 +23,7 @@ export interface JobVacancy {
   title: string;
   location: string;
   type: string;
-  description: unknown[];
+  description: PortableTextBlock[];
   requirements: string[];
   publishedAt: string;
 }
