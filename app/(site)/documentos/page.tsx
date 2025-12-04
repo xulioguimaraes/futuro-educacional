@@ -2,41 +2,71 @@ import Image from "next/image";
 import ContactForm from "../components/ContactForm";
 import HeroShowcase from "../components/HeroShowcase";
 import ButtonWithIcon from "../components/ButtonWithIcon";
+import { getDocuments, type Document } from "../../../sanity/lib/fetch";
 
-const documents = [
+// Dados estáticos de fallback (usados quando o CMS não está configurado)
+const fallbackDocuments = [
   {
+    _id: "1",
     title: "Manual do Estudante",
     description: "Guia completo com orientações sobre a vida acadêmica.",
+    fileUrl: "",
   },
   {
+    _id: "2",
     title: "Proposta Pedagógica",
     description: "Conheça nossa metodologia e princípios educacionais.",
+    fileUrl: "",
   },
   {
+    _id: "3",
     title: "Revista Futuro",
     description:
       "Conteúdos exclusivos, novidades e artigos para nossa comunidade escolar.",
+    fileUrl: "",
   },
   {
+    _id: "4",
     title: "Cláusulas Gerais",
     description:
       "Informações básicas que regem o funcionamento da instituição.",
+    fileUrl: "",
   },
   {
+    _id: "5",
     title: "Contratos",
     description: "Documentos formais de vínculo acadêmico.",
+    fileUrl: "",
   },
   {
+    _id: "6",
     title: "Termos e Condições",
     description: "Regras de uso e responsabilidades.",
+    fileUrl: "",
   },
   {
+    _id: "7",
     title: "Regimento Interno",
     description: "Normas e diretrizes que organizam o dia a dia escolar.",
+    fileUrl: "",
   },
 ];
 
-export default function DocumentosPage() {
+export default async function DocumentosPage() {
+  let documents: Document[] = fallbackDocuments;
+
+  // Tenta buscar do CMS se configurado
+  if (process.env.NEXT_PUBLIC_SANITY_PROJECT_ID) {
+    try {
+      const cmsDocuments = await getDocuments();
+      if (cmsDocuments && cmsDocuments.length > 0) {
+        documents = cmsDocuments;
+      }
+    } catch (error) {
+      console.error("Erro ao buscar documentos do CMS:", error);
+    }
+  }
+
   return (
     <main className="bg-white">
       <HeroShowcase
@@ -70,7 +100,7 @@ export default function DocumentosPage() {
 
       {/* Documents Section */}
       <section className="relative py-12 md:py-24 text-white overflow-hidden">
-        <div 
+        <div
           className="absolute inset-0 w-full h-full"
           style={{
             backgroundImage: "url(/BACK-docs.png)",
@@ -81,8 +111,11 @@ export default function DocumentosPage() {
         />
         <div className="container mx-auto px-4 relative z-10">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
-            {documents.map((doc, index) => (
-              <div key={index} className="rounded-lg p-4 md:p-6 flex flex-col md:flex-row gap-4 md:gap-6">
+            {documents.map((doc) => (
+              <div
+                key={doc._id}
+                className="rounded-lg p-4 md:p-6 flex flex-col md:flex-row gap-4 md:gap-6"
+              >
                 <div className="shrink-0 flex justify-center md:justify-start">
                   <Image
                     src="/icon-pdf.svg"
@@ -105,7 +138,13 @@ export default function DocumentosPage() {
                   </div>
                   <div className="border-t-[3px] border-[#FDC938] my-3 md:my-4"></div>
                   <div className="mt-auto flex justify-center md:justify-start">
-                    <ButtonWithIcon>Baixar PDF</ButtonWithIcon>
+                    {doc.fileUrl ? (
+                      <a href={doc.fileUrl} target="_blank" rel="noopener noreferrer">
+                        <ButtonWithIcon>Baixar PDF</ButtonWithIcon>
+                      </a>
+                    ) : (
+                      <ButtonWithIcon>Baixar PDF</ButtonWithIcon>
+                    )}
                   </div>
                 </div>
               </div>

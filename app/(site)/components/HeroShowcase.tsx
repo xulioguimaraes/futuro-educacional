@@ -28,7 +28,7 @@ export default function HeroShowcase({
           <span className="tracking-[4px] text-[36px] text-white font-medium">
             {eyebrow}
           </span>
-          <h1 className="text-[64px] font-extrabold text-white">{title}</h1>
+          <h1 className="text-6xl font-extrabold text-white">{title}</h1>
         </div>
       </div>
     </section>
