@@ -1,8 +1,9 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import Pagination from "../components/Pagination";
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import type { BlogPost, Category } from "../../../sanity/lib/fetch";
 import { urlFor } from "../../../sanity/lib/client";
 
@@ -12,7 +13,8 @@ interface BlogPageClientProps {
   categories: Category[];
 }
 
-const tags = [
+// Fallback tags caso não tenha posts
+const fallbackTags = [
   "Ciências",
   "ENEM",
   "Matemática",
@@ -28,6 +30,7 @@ const comments = [
 ];
 
 const ITEMS_PER_PAGE = 3;
+const TAGS_INITIAL_LIMIT = 9; // Aproximadamente 3 linhas de tags
 
 export default function BlogPageClient({
   blogPosts,
@@ -37,6 +40,24 @@ export default function BlogPageClient({
   const [currentPage, setCurrentPage] = useState(1);
   const [searchQuery, setSearchQuery] = useState("");
   const [showFilters, setShowFilters] = useState(false);
+  const [showAllTags, setShowAllTags] = useState(false);
+  const [selectedTag, setSelectedTag] = useState<string | null>(null);
+
+  // Extrair tags únicas de todos os posts
+  const allTags = useMemo(() => {
+    const tagsSet = new Set<string>();
+    blogPosts.forEach((post) => {
+      if (post.tags && Array.isArray(post.tags)) {
+        post.tags.forEach((tag) => tagsSet.add(tag));
+      }
+    });
+    const uniqueTags = Array.from(tagsSet);
+    return uniqueTags.length > 0 ? uniqueTags : fallbackTags;
+  }, [blogPosts]);
+
+  // Tags visíveis (limitadas ou todas)
+  const visibleTags = showAllTags ? allTags : allTags.slice(0, TAGS_INITIAL_LIMIT);
+  const hasMoreTags = allTags.length > TAGS_INITIAL_LIMIT;
 
   const totalPages = Math.ceil(blogPosts.length / ITEMS_PER_PAGE);
   const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
@@ -127,14 +148,14 @@ export default function BlogPageClient({
               <h3 className="text-lg md:text-[22px] font-semibold text-[#17012C] mb-3 md:mb-4">Últimos Posts</h3>
               <div className="space-y-3 md:space-y-4">
                 {latestPosts.map((post) => (
-                  <div key={post._id} className="flex gap-3">
+                  <Link key={post._id} href={`/blog/${post.slug?.current || post._id}`} className="flex gap-3 group">
                     <div className="relative w-16 h-16 md:w-20 md:h-20 shrink-0 rounded-lg overflow-hidden">
                       <Image
                         src={getImageUrl(post.mainImage, "/crianças/crianca1.jpg")}
                         alt={post.title}
                         fill
                         sizes="80px"
-                        className="object-cover"
+                        className="object-cover group-hover:scale-105 transition-transform"
                       />
                     </div>
                     <div className="flex-1">
@@ -145,9 +166,9 @@ export default function BlogPageClient({
                         </svg>
                         <p className="text-xs text-gray-600">Por: {post.author}</p>
                       </div>
-                      <h4 className="text-sm md:text-base font-semibold text-[#17012C] line-clamp-2">{post.title}</h4>
+                      <h4 className="text-sm md:text-base font-semibold text-[#17012C] line-clamp-2 group-hover:text-[#1C437F] transition-colors">{post.title}</h4>
                     </div>
-                  </div>
+                  </Link>
                 ))}
               </div>
             </div>
@@ -171,17 +192,42 @@ export default function BlogPageClient({
             <div className="bg-[#1C437F1A] rounded-lg p-4 md:p-6">
               <h3 className="text-lg md:text-[22px] font-semibold text-[#17012C] mb-3 md:mb-4">Tags</h3>
               <div className="flex flex-wrap gap-2">
-                {tags.map((tag, index) => (
+                {visibleTags.map((tag, index) => (
                   <button
                     key={index}
+                    onClick={() => setSelectedTag(selectedTag === tag ? null : tag)}
                     className={`px-3 py-1 rounded-[5px] text-sm font-normal transition-colors ${
-                      tag === "ENEM" ? "bg-[#1C437F] text-white" : "bg-white text-[#17012C] hover:bg-gray-200"
+                      selectedTag === tag 
+                        ? "bg-[#1C437F] text-white" 
+                        : "bg-white text-[#17012C] hover:bg-gray-200"
                     }`}
                   >
                     {tag}
                   </button>
                 ))}
               </div>
+              {hasMoreTags && (
+                <button
+                  onClick={() => setShowAllTags(!showAllTags)}
+                  className="mt-3 text-[#1C437F] text-sm font-medium hover:underline flex items-center gap-1"
+                >
+                  {showAllTags ? (
+                    <>
+                      Ver menos
+                      <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 15l7-7 7 7" />
+                      </svg>
+                    </>
+                  ) : (
+                    <>
+                      Ver mais ({allTags.length - TAGS_INITIAL_LIMIT})
+                      <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                      </svg>
+                    </>
+                  )}
+                </button>
+              )}
             </div>
 
             {/* Comments */}
@@ -247,9 +293,12 @@ export default function BlogPageClient({
                     <p className="text-sm md:text-base text-[#504E4E] font-normal mb-4 md:mb-6 line-clamp-3">
                       {post.excerpt}
                     </p>
-                    <button className="bg-[#1C437F] text-white font-semibold px-5 md:px-6 py-2 rounded-lg hover:bg-[#1C437F]/90 transition-colors text-sm md:text-base">
+                    <Link 
+                      href={`/blog/${post.slug.current}`}
+                      className="inline-block bg-[#1C437F] text-white font-semibold px-5 md:px-6 py-2 rounded-lg hover:bg-[#1C437F]/90 transition-colors text-sm md:text-base"
+                    >
                       Leia Mais
-                    </button>
+                    </Link>
                     <div className="h-px mt-6 md:mt-8 bg-[#E4E4E4] w-full"></div>
                   </div>
                 </article>

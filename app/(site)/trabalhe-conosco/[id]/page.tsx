@@ -2,9 +2,9 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import HeroShowcase from "../../components/HeroShowcase";
 import ContactForm from "../../components/ContactForm";
-import ButtonWithIcon from "../../components/ButtonWithIcon";
-import { getJobVacancyById, getJobVacancies, type JobVacancy } from "../../../../sanity/lib/fetch";
+import { getJobVacancyById, type JobVacancy } from "../../../../sanity/lib/fetch";
 import { PortableText } from "@portabletext/react";
+import ApplicationForm from "./ApplicationForm";
 
 // Dados estáticos de fallback
 const fallbackVacancies: JobVacancy[] = [
@@ -290,20 +290,53 @@ export default async function VagaDetalhePage({ params }: PageProps) {
 
               <div className="border-t border-gray-100 my-8"></div>
 
-              {/* CTA */}
-              <div className="bg-gradient-to-r from-[#1C437F] to-[#2A5A9E] rounded-xl p-6 md:p-8 text-center">
-                <h3 className="text-xl md:text-2xl font-bold text-white mb-2">
-                  Interessado nesta vaga?
-                </h3>
-                <p className="text-white/80 mb-6">
-                  Envie seu currículo e faça parte da nossa equipe!
-                </p>
-                <a
-                  href="mailto:rh@futuroeducacional.com.br?subject=Candidatura - ${vacancy.title}"
-                  className="inline-block"
-                >
-                  <ButtonWithIcon>Candidatar-se</ButtonWithIcon>
-                </a>
+              {/* Seção de Candidatura */}
+              <div id="candidatar">
+                <h2 className="text-xl md:text-2xl font-bold text-[#17012C] mb-6 flex items-center gap-3">
+                  <span className="w-1 h-6 bg-[#FDC938] rounded-full"></span>
+                  Candidate-se a esta vaga
+                </h2>
+
+                {/* Tabs de opção */}
+                <div className="bg-gray-50 rounded-xl p-6 md:p-8">
+                  <div className="flex flex-col md:flex-row gap-4 mb-6">
+                    <div className="flex-1 bg-white rounded-lg p-4 border-2 border-[#1C437F]">
+                      <div className="flex items-center gap-3 mb-2">
+                        <div className="w-10 h-10 bg-[#1C437F] rounded-full flex items-center justify-center">
+                          <svg className="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                          </svg>
+                        </div>
+                        <div>
+                          <h3 className="font-bold text-[#17012C]">Preencher formulário</h3>
+                          <p className="text-sm text-gray-500">Envie seus dados diretamente</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="flex items-center justify-center text-gray-400 font-medium">
+                      ou
+                    </div>
+                    <a
+                      href={`mailto:rh@futuroeducacional.com.br?subject=Candidatura - ${encodeURIComponent(vacancy.title)}&body=Olá,%0A%0AGostaria de me candidatar à vaga de ${encodeURIComponent(vacancy.title)}.%0A%0ANome:%0ATelefone:%0A%0ASegue meu currículo em anexo.%0A%0AAtenciosamente.`}
+                      className="flex-1 bg-white rounded-lg p-4 border-2 border-gray-200 hover:border-[#FDC938] transition-colors group"
+                    >
+                      <div className="flex items-center gap-3">
+                        <div className="w-10 h-10 bg-gray-100 group-hover:bg-[#FDC938] rounded-full flex items-center justify-center transition-colors">
+                          <svg className="w-5 h-5 text-gray-600 group-hover:text-[#17012C]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                          </svg>
+                        </div>
+                        <div>
+                          <h3 className="font-bold text-[#17012C]">Enviar por e-mail</h3>
+                          <p className="text-sm text-gray-500">rh@futuroeducacional.com.br</p>
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+
+                  {/* Formulário */}
+                  <ApplicationForm vacancyId={vacancy._id} vacancyTitle={vacancy.title} />
+                </div>
               </div>
             </div>
 

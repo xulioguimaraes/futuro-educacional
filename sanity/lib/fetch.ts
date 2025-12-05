@@ -39,7 +39,7 @@ export interface BlogPost {
   tags: string[];
   publishedAt: string;
   excerpt: string;
-  body?: unknown[];
+  body?: PortableTextBlock[];
 }
 
 export interface Category {

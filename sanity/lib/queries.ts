@@ -71,6 +71,7 @@ export const latestBlogPostsQuery = groq`
   *[_type == "blogPost"] | order(publishedAt desc)[0...3] {
     _id,
     title,
+    slug,
     "author": author->name,
     mainImage
   }
